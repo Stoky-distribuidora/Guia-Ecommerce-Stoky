@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><base href="../public/">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Guia de Compras Stoky B2B</title>
+<meta name="description" content="Passo a passo para comprar no site da Stoky: entrar, encontrar produtos, montar o carrinho, finalizar o pedido e usar a Área do cliente.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23157a35'/%3E%3Cpath d='M9 16.5l5 5 9-10' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+/* =========================================================================
+   GUIA STOKY B2B: estilos
+   1. Fonte  2. Tokens  3. Base  4. Topo  5. Menu  6. Conteúdo  7. Fluxo e cartões
+   8. Ramificações  9. Capturas  10. Callouts  11. Botões e rótulos do site
+   12. Navegação, suporte, ampliação  13. Responsivo
+   ========================================================================= */
+
+/* 1. Fonte (hospedada localmente: o guia não depende de serviços externos) */
+@font-face{font-family:"Figtree";src:url("../src/assets/figtree-latin-wght-normal.woff2") format("woff2");font-weight:300 900;font-style:normal;font-display:swap}
+
+/* 2. Tokens ---------------------------------------------------------------- */
+:root{
+  color-scheme:light;
+  /* superfícies e texto */
+  --bg:#f4f6f1; --surface:#ffffff; --surface-2:#ecf0e8;
+  --line:#dde3d6; --line-strong:#c3ccb9; --line-control:#7f8c78;
+  --fg:#18211a; --muted:#546055;
+  /* ação, progresso e conclusão */
+  --brand:#1d9a3e;
+  --action:#157a35; --action-hover:#0f6429; --action-press:#0b5321; --on-action:#ffffff;
+  --ok-soft:#e3f3e6; --ok-line:#b4dcbc; --ok-text:#0f6429;
+  --focus:#0f6429; --sel:#c4e8cc;
+  /* dica (informativa) e atenção */
+  --info:#1b5f8c; --info-soft:#e7f0f7; --info-line:#bcd5e6;
+  --warn:#8a4a05; --warn-soft:#fdf1dc; --warn-line:#ecc78a;
+  /* rótulos que imitam o site */
+  --ui-dark:#1f2837; --ui-dark-fg:#ffffff;
+  --tag-nc:#b8530f; --tag-ok:#1f7a3a; --tag-low:#e0a100; --tag-low-fg:#1b1b1b; --tag-out:#b3261e; --tag-pct:#d9f1df; --tag-pct-fg:#16672f;
+  /* tipografia (escala fixa, razão ~1.2) */
+  --font:"Figtree",system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --fs-xs:.8125rem; --fs-sm:.9375rem; --fs-base:1.0625rem; --fs-md:1.1875rem; --fs-lg:1.3125rem; --fs-2xl:2.5rem;
+  /* espaçamento (base 4px) */
+  --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem; --s5:1.5rem; --s6:2rem; --s7:3rem; --s8:4.5rem;
+  /* forma e profundidade */
+  --r-sm:6px; --r-md:10px; --r-lg:14px; --r-pill:999px;
+  --sh-1:0 1px 2px rgba(24,33,26,.06),0 1px 3px rgba(24,33,26,.05);
+  --sh-2:0 12px 32px rgba(24,33,26,.16),0 2px 8px rgba(24,33,26,.08);
+  /* layout e movimento */
+  --topbar-h:60px; --sidebar-w:288px;
+  --top:calc(var(--topbar-h) + env(safe-area-inset-top,0px));
+  --ease:cubic-bezier(.22,1,.36,1); --dur:.18s;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#0f1410; --surface:#161d17; --surface-2:#1c251e;
+  --line:#2a372c; --line-strong:#3a4b3d; --line-control:#6f8574;
+  --fg:#e8efe9; --muted:#a2b2a5;
+  --brand:#4ccb70;
+  --action:#4ccb70; --action-hover:#6fdc8c; --action-press:#8be6a3; --on-action:#06200f;
+  --ok-soft:#17301d; --ok-line:#2b5a37; --ok-text:#7fe09a;
+  --focus:#8be6a3; --sel:#1f5a30;
+  --info:#8cc4ea; --info-soft:#14232e; --info-line:#28465c;
+  --warn:#f2b25c; --warn-soft:#2d2312; --warn-line:#5c4620;
+  --ui-dark:#2b3647;
+  --tag-pct:#1d3a25; --tag-pct-fg:#8fe3a8;
+  --sh-1:0 1px 2px rgba(0,0,0,.35);
+  --sh-2:0 12px 32px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0f1410; --surface:#161d17; --surface-2:#1c251e;
+  --line:#2a372c; --line-strong:#3a4b3d; --line-control:#6f8574;
+  --fg:#e8efe9; --muted:#a2b2a5;
+  --brand:#4ccb70;
+  --action:#4ccb70; --action-hover:#6fdc8c; --action-press:#8be6a3; --on-action:#06200f;
+  --ok-soft:#17301d; --ok-line:#2b5a37; --ok-text:#7fe09a;
+  --focus:#8be6a3; --sel:#1f5a30;
+  --info:#8cc4ea; --info-soft:#14232e; --info-line:#28465c;
+  --warn:#f2b25c; --warn-soft:#2d2312; --warn-line:#5c4620;
+  --ui-dark:#2b3647;
+  --tag-pct:#1d3a25; --tag-pct-fg:#8fe3a8;
+  --sh-1:0 1px 2px rgba(0,0,0,.35);
+  --sh-2:0 12px 32px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.35)}
+
+/* 3. Base ------------------------------------------------------------------ */
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;scrollbar-gutter:stable;scrollbar-color:var(--line-strong) var(--bg);accent-color:var(--action)}
+html.no-scroll{overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--fs-base)/1.6 var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--sel);color:inherit}
+a{color:var(--action);text-underline-offset:.18em}
+button{font:inherit;color:inherit}
+img{max-width:100%}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:var(--r-sm)}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.ic{width:1.25em;height:1.25em;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.skip{position:fixed;left:var(--s4);top:var(--s3);z-index:60;padding:var(--s2) var(--s4);border-radius:var(--r-md);background:var(--action);color:var(--on-action);font-weight:700;border:0;transform:translateY(-200%)}
+.skip:focus-visible{transform:none;outline-offset:3px}
+
+/* botões (base compartilhada) */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);min-height:40px;padding:0 var(--s4);border:1px solid var(--line-control);border-radius:var(--r-md);background:var(--surface);color:var(--fg);font-size:var(--fs-sm);font-weight:600;line-height:1.2;cursor:pointer;
+  transition:background-color var(--dur),border-color var(--dur),color var(--dur),transform var(--dur) var(--ease)}
+.btn:hover{background:var(--surface-2);border-color:var(--action);color:var(--ok-text)}
+.btn:active{background:var(--ok-soft);transform:translateY(1px)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+
+/* 4. Topo ------------------------------------------------------------------ */
+.topbar{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.topbar-in{position:relative;display:flex;align-items:center;gap:var(--s4);height:var(--topbar-h);max-width:1320px;margin:0 auto;
+  padding-inline:max(var(--s5),env(safe-area-inset-left,0px)) max(var(--s5),env(safe-area-inset-right,0px))}
+.brand{display:flex;align-items:center;gap:var(--s3);min-width:0}
+.brand-name{display:inline-flex;align-items:center;gap:var(--s2);font-size:1.5rem;font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--brand);white-space:nowrap}
+.brand-name small{font-size:var(--fs-xs);font-weight:700;letter-spacing:.04em;padding:3px 7px;border:1px solid var(--line-strong);border-radius:var(--r-sm);color:var(--muted)}
+.brand-sub{color:var(--muted);font-size:var(--fs-sm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-left:var(--s3);border-left:1px solid var(--line)}
+.progress{margin-left:auto;display:flex;align-items:center;gap:var(--s3);font-size:var(--fs-sm);font-weight:600;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.bar{width:150px;height:8px;border-radius:var(--r-pill);background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--action);border-radius:inherit;transition:width .4s var(--ease)}
+.menu-btn{display:none}
+
+/* 5. Menu lateral ---------------------------------------------------------- */
+.shell{display:grid;grid-template-columns:var(--sidebar-w) minmax(0,1fr);max-width:1320px;margin:0 auto}
+nav.menu{position:sticky;top:var(--top);align-self:start;height:calc(100vh - var(--top));height:calc(100dvh - var(--top));overflow-y:auto;overscroll-behavior:contain;
+  scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent;
+  padding:var(--s5) var(--s4) var(--s7) max(var(--s5),env(safe-area-inset-left,0px))}
+.menu-head{display:flex;align-items:center;justify-content:space-between;margin:0 0 var(--s3) var(--s3)}
+.menu-title{margin:0;font-size:var(--fs-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.menu-close{display:none}
+.mod{margin-bottom:var(--s1)}
+.mod-btn{width:100%;display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:var(--s3);min-height:44px;padding:var(--s2) var(--s3);text-align:left;
+  border:1px solid transparent;border-radius:var(--r-md);background:none;cursor:pointer;font-size:var(--fs-sm);font-weight:600;line-height:1.3;
+  transition:background-color var(--dur),border-color var(--dur)}
+.mod-btn:hover{background:var(--surface-2)}
+.mod.active>.mod-btn{background:var(--surface);border-color:var(--line);box-shadow:var(--sh-1)}
+.mod-num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:var(--fs-xs);font-weight:700;font-variant-numeric:tabular-nums;background:var(--surface-2);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);transition:background-color var(--dur),color var(--dur)}
+.mod.active .mod-num{background:var(--action);color:var(--on-action);box-shadow:none}
+.mod.done .mod-num{background:var(--ok-soft);color:var(--ok-text);box-shadow:inset 0 0 0 1px var(--ok-line)}
+.mod.active.done .mod-num{background:var(--action);color:var(--on-action);box-shadow:none}
+.mod-num .ic{width:15px;height:15px;stroke-width:2.5}
+.mod-count{font-size:var(--fs-xs);font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.mod-steps{display:none;list-style:none;margin:var(--s1) 0 var(--s3) 25px;padding:0 0 0 var(--s3);border-left:2px solid var(--line)}
+.mod.active .mod-steps{display:block}
+.mod-steps button{width:100%;display:grid;grid-template-columns:20px minmax(0,1fr);gap:var(--s2);align-items:start;min-height:36px;padding:7px var(--s3) 7px var(--s2);text-align:left;border:0;border-radius:var(--r-sm);background:none;cursor:pointer;
+  font-size:.90625rem;line-height:1.35;color:var(--muted);transition:background-color var(--dur),color var(--dur)}
+.mod-steps button:hover{background:var(--surface-2);color:var(--fg)}
+.mod-steps button.ok{color:var(--fg)}
+.mod-steps button.ok .ck{color:var(--action)}
+.mod-steps button.cur{background:var(--ok-soft);color:var(--ok-text);font-weight:700}
+.ck{font-size:var(--fs-xs);font-weight:600;font-variant-numeric:tabular-nums;padding-top:1px}
+.ck .ic{width:15px;height:15px;stroke-width:2.5;margin-top:1px}
+
+/* 6. Conteúdo -------------------------------------------------------------- */
+main{min-width:0;padding:var(--s7) max(var(--s5),env(safe-area-inset-right,0px)) var(--s8) var(--s6);outline:0}
+.view{animation:enter .28s var(--ease) both}
+@keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.mod-head,.flow,.pager,.help{max-width:780px}
+h1{margin:0 0 var(--s3);font-size:var(--fs-2xl);font-weight:800;line-height:1.08;letter-spacing:-.025em;text-wrap:balance;outline:0}
+.mod-meta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s3);margin:0 0 var(--s4);font-size:var(--fs-sm);color:var(--muted);font-variant-numeric:tabular-nums}
+.mod-meta>span+span::before{content:"";display:inline-block;width:3px;height:3px;border-radius:50%;background:var(--line-control);margin-right:var(--s3);vertical-align:middle}
+.mod-meta .chip{padding:2px var(--s3);border-radius:var(--r-pill);background:var(--ok-soft);border:1px solid var(--ok-line);color:var(--ok-text);font-weight:700}
+.mod-meta .chip::before{display:none}
+.lead{margin:0 0 var(--s5);max-width:62ch;font-size:var(--fs-md);line-height:1.55;color:var(--muted);text-wrap:pretty}
+.need{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2);margin:0 0 var(--s6)}
+.need strong{margin-right:var(--s1);font-size:var(--fs-sm);color:var(--muted);font-weight:600}
+.need span{padding:4px var(--s3);border:1px solid var(--line);border-radius:var(--r-pill);background:var(--surface);font-size:var(--fs-sm)}
+
+/* 7. Fluxo e cartões ------------------------------------------------------- */
+.flow{list-style:none;margin:0;padding:0}
+.node{position:relative;display:grid;grid-template-columns:40px minmax(0,1fr);gap:var(--s4);padding-bottom:var(--s6)}
+.node::before{content:"";position:absolute;left:19px;top:44px;bottom:6px;width:2px;background:var(--line);transition:background-color .3s}
+.node::after{content:"";position:absolute;left:14px;bottom:0;border:6px solid transparent;border-top:8px solid var(--line);border-bottom:0;transition:border-top-color .3s}
+.node:last-child{padding-bottom:0}
+.node:last-child::before,.node:last-child::after{display:none}
+.node.ok::before{background:var(--action)}
+.node.ok::after{border-top-color:var(--action)}
+.dot{position:relative;z-index:1;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:var(--fs-base);font-weight:700;font-variant-numeric:tabular-nums;
+  background:var(--surface);border:2px solid var(--line-control);color:var(--muted);transition:background-color var(--dur),border-color var(--dur),color var(--dur),box-shadow var(--dur)}
+.dot .ic{width:20px;height:20px;stroke-width:2.5}
+.node.is-current .dot{border-color:var(--action);color:var(--ok-text);box-shadow:0 0 0 4px var(--ok-soft)}
+.node.ok .dot{background:var(--action);border-color:var(--action);color:var(--on-action)}
+.node.ok.is-current .dot{box-shadow:0 0 0 4px var(--ok-soft)}
+.node.just .dot{animation:pop .3s var(--ease)}
+@keyframes pop{from{transform:scale(.82)}to{transform:none}}
+.node.choice .dot{border-style:dashed}
+.node.choice.ok .dot{border-style:solid}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s5) var(--s5) var(--s5);box-shadow:var(--sh-1);scroll-margin-top:calc(var(--top) + var(--s4));outline:0;
+  transition:border-color .25s,box-shadow .25s}
+.node.is-current .card{border-color:var(--ok-line)}
+.node.flash .card{box-shadow:0 0 0 3px var(--ok-line),var(--sh-1)}
+.card{overflow-wrap:break-word}
+.card>:last-child{margin-bottom:0}
+.card h2{margin:0 0 var(--s2);font-size:var(--fs-lg);font-weight:700;line-height:1.3;letter-spacing:-.01em;text-wrap:balance}
+.card p{margin:0 0 var(--s3);max-width:64ch}
+.card ul,.card ol{margin:var(--s2) 0 var(--s3);padding-left:1.4em}
+.card li{margin:var(--s2) 0;padding-left:var(--s1)}
+.card li::marker{color:var(--action);font-weight:700}
+.card strong{font-weight:700}
+.where{display:flex;align-items:center;gap:6px;margin:0 0 var(--s3)!important;font-size:var(--fs-sm);color:var(--muted)}
+.where .ic{width:16px;height:16px}
+.got{margin-top:var(--s4)}
+.got .ic{width:18px;height:18px}
+.got .got-on{display:none}
+.got[aria-pressed="true"]{background:var(--ok-soft);border-color:var(--action);color:var(--ok-text)}
+.got[aria-pressed="true"] .got-on{display:block}
+.got[aria-pressed="true"] .got-off{display:none}
+
+/* 8. Ramificações ---------------------------------------------------------- */
+.choice-q{margin-bottom:var(--s4)!important}
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s3)}
+.path{min-width:0;padding:var(--s4);border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface-2)}
+.path h3{margin:0 0 var(--s1);font-size:var(--fs-base);font-weight:700;line-height:1.3;text-wrap:balance}
+.path .who{margin:0 0 var(--s3)!important;padding-bottom:var(--s3);border-bottom:1px solid var(--line-strong);font-size:var(--fs-sm);color:var(--muted)}
+.path ol{list-style:none;counter-reset:p;margin:0;padding:0;font-size:var(--fs-sm)}
+.path li{counter-increment:p;display:grid;grid-template-columns:22px minmax(0,1fr);gap:var(--s2);margin:var(--s2) 0;padding:0;line-height:1.5}
+.path li::before{content:counter(p);display:grid;place-items:center;width:22px;height:22px;margin-top:1px;border-radius:50%;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line-control);font-size:var(--fs-xs);font-weight:700;color:var(--muted)}
+
+/* 9. Capturas de tela ------------------------------------------------------ */
+.shot{margin:var(--s4) 0 var(--s3);border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface-2);overflow:hidden}
+.shot-img{display:flex;justify-content:center;padding:var(--s3);cursor:zoom-in}
+.shot-img img{display:block;height:auto;border:1px solid var(--line);border-radius:var(--r-sm);background:#fff;box-shadow:var(--sh-1)}
+.shot figcaption{display:flex;align-items:center;gap:var(--s3);padding:var(--s2) var(--s2) var(--s2) var(--s4);border-top:1px solid var(--line);background:var(--surface);font-size:var(--fs-sm);color:var(--muted)}
+.shot figcaption span{flex:1;min-width:0}
+.shot-open{min-height:36px;padding:0 var(--s3)}
+.shot-open .ic{width:17px;height:17px}
+.shot-missing{display:flex;align-items:center;justify-content:center;gap:var(--s2);min-height:120px;margin:var(--s3);padding:var(--s4);border:1px dashed var(--line-control);border-radius:var(--r-sm);color:var(--muted);font-size:var(--fs-sm);text-align:center}
+.explain{margin:var(--s4) 0 var(--s2);border-bottom:1px solid var(--line)}
+.explain>div{display:grid;grid-template-columns:128px minmax(0,1fr);gap:var(--s1) var(--s5);padding:var(--s3) 0;border-top:1px solid var(--line)}
+.explain dt{padding-top:3px;font-size:var(--fs-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.explain dd{margin:0;font-size:1rem;line-height:1.6}
+.explain dd>:first-child{margin-top:0}
+.explain dd>:last-child{margin-bottom:0}
+.explain dd ul,.explain dd ol{padding-left:1.25em}
+
+/* 10. Dicas e atenção ------------------------------------------------------ */
+.tip{display:grid;grid-template-columns:22px minmax(0,1fr);gap:var(--s3);margin:var(--s4) 0 0;padding:var(--s3) var(--s4);border:1px solid var(--info-line);border-radius:var(--r-md);background:var(--info-soft);font-size:1rem;line-height:1.55}
+.tip .ic{width:22px;height:22px;margin-top:1px;color:var(--info)}
+.tip b{display:block;margin-bottom:2px;font-size:var(--fs-xs);font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--info)}
+.tip.warn{border-color:var(--warn-line);background:var(--warn-soft)}
+.tip.warn .ic,.tip.warn b{color:var(--warn)}
+.tip b+span{display:block}
+
+/* 11. Rótulos que imitam o site -------------------------------------------- */
+.ui{display:inline-block;padding:1px 9px;border-radius:5px;font-weight:700;font-size:.86em;line-height:1.3;white-space:nowrap;vertical-align:1px}
+.ui-g{background:var(--action);color:var(--on-action)}
+.ui-d{background:var(--ui-dark);color:var(--ui-dark-fg)}
+.ui-o{border:1.5px solid var(--action);color:var(--ok-text);background:var(--surface)}
+.tag{display:inline-block;padding:1px 7px;border-radius:var(--r-pill);font-size:.78em;font-weight:700;white-space:nowrap;vertical-align:1px}
+.t-nc{background:var(--tag-nc);color:#fff}.t-ok{background:var(--tag-ok);color:#fff}.t-low{background:var(--tag-low);color:var(--tag-low-fg)}.t-out{background:var(--tag-out);color:#fff}.t-pct{background:var(--tag-pct);color:var(--tag-pct-fg)}
+kbd{display:inline-block;min-width:1.7em;padding:0 6px;border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:5px;background:var(--surface);font:inherit;font-size:.92em;font-weight:700;text-align:center}
+.legend{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s3) var(--s4);margin:var(--s3) 0;align-items:baseline}
+
+/* 12. Navegação entre etapas, suporte e ampliação -------------------------- */
+.pager{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s6)}
+.pager button{display:flex;align-items:center;gap:var(--s3);min-height:64px;padding:var(--s3) var(--s4);min-width:0;text-align:left;border:1px solid var(--line-control);border-radius:var(--r-md);background:var(--surface);cursor:pointer;
+  transition:background-color var(--dur),border-color var(--dur),transform var(--dur) var(--ease)}
+.pager button:hover{background:var(--surface-2);border-color:var(--action)}
+.pager button:active{transform:translateY(1px)}
+.pager button.next{margin-left:auto;flex-direction:row-reverse;text-align:right;background:var(--action);border-color:var(--action);color:var(--on-action)}
+.pager button.next:hover{background:var(--action-hover);border-color:var(--action-hover)}
+.pager button.next:active{background:var(--action-press)}
+.pager small{display:block;font-size:var(--fs-xs);font-weight:600;letter-spacing:.02em;color:var(--muted)}
+.pager button.next small{color:inherit}
+.pager strong{display:block;font-size:var(--fs-base);font-weight:700;line-height:1.25}
+.pager .ic{width:22px;height:22px}
+.help{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s5);margin-top:var(--s7);padding:var(--s5);border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--sh-1)}
+.help-ic{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--ok-soft);color:var(--ok-text)}
+.help-ic .ic{width:22px;height:22px}
+.help-body{flex:1 1 280px;min-width:0}
+.help h2{margin:0 0 var(--s1);font-size:var(--fs-lg);font-weight:700;letter-spacing:-.01em}
+.help p{margin:0;font-size:1rem}
+.help p+p{margin-top:var(--s1);display:flex;align-items:center;gap:6px;font-size:var(--fs-sm);color:var(--muted)}
+.help p+p .ic{width:16px;height:16px}
+.help b{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.copy .ic{width:17px;height:17px}
+
+.scrim{position:fixed;inset:0;z-index:30;background:rgba(10,16,11,.45)}
+dialog.lightbox{width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:#fff;overflow:hidden}
+dialog.lightbox[open]{display:flex;flex-direction:column}
+dialog.lightbox::backdrop{background:rgba(8,12,9,.94)}
+.lb-bar{display:flex;align-items:center;gap:var(--s3);padding:max(var(--s3),env(safe-area-inset-top,0px)) max(var(--s4),env(safe-area-inset-right,0px)) var(--s3) max(var(--s4),env(safe-area-inset-left,0px))}
+.lb-bar p{flex:1;min-width:0;margin:0;font-size:var(--fs-sm);font-weight:600;line-height:1.35}
+.lb-bar .btn{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.45);color:#fff}
+.lb-bar .btn:hover{background:rgba(255,255,255,.2);border-color:#fff;color:#fff}
+.lb-bar :focus-visible,.lb-stage:focus-visible{outline-color:#fff}
+.lb-stage{flex:1;min-height:0;display:flex;overflow:auto;padding:0 max(var(--s4),env(safe-area-inset-right,0px)) max(var(--s4),env(safe-area-inset-bottom,0px)) max(var(--s4),env(safe-area-inset-left,0px));cursor:zoom-out}
+.lb-stage img{flex:none;margin:auto;max-width:none;height:auto;border-radius:var(--r-sm);background:#fff;cursor:default}
+
+/* 13. Responsivo ----------------------------------------------------------- */
+@media (max-width:1100px){:root{--sidebar-w:264px}main{padding-left:var(--s5)}}
+@media (max-width:860px){
+  :root{--topbar-h:56px}
+  .topbar-in{gap:var(--s3);padding-inline:max(var(--s4),env(safe-area-inset-left,0px)) max(var(--s4),env(safe-area-inset-right,0px))}
+  .brand-sub{display:none}
+  .menu-btn{display:inline-flex;min-height:44px;padding:0 var(--s3)}
+  .shell{grid-template-columns:minmax(0,1fr)}
+  nav.menu{position:fixed;inset:0 auto 0 0;z-index:40;width:min(340px,88vw);height:auto;background:var(--surface);box-shadow:var(--sh-2);
+    padding-top:max(var(--s4),env(safe-area-inset-top,0px));transform:translateX(-104%);visibility:hidden;transition:transform .26s var(--ease),visibility 0s .26s}
+  nav.menu.open{transform:none;visibility:visible;transition:transform .26s var(--ease)}
+  .menu-head{margin-left:var(--s1)}
+  .menu-close{display:inline-flex;min-height:44px;padding:0 var(--s3)}
+  main{padding:var(--s5) max(var(--s4),env(safe-area-inset-right,0px)) var(--s7) max(var(--s4),env(safe-area-inset-left,0px))}
+}
+@media (max-width:560px){
+  .progress{gap:0}
+  .progress .bar{position:absolute;left:0;right:0;bottom:-1px;width:auto;height:3px;border-radius:0;box-shadow:none}
+  h1{font-size:2rem}
+  .lead{font-size:var(--fs-base)}
+  .node{grid-template-columns:32px minmax(0,1fr);gap:var(--s3);padding-bottom:var(--s5)}
+  .node::before{left:15px;top:36px}
+  .node::after{left:10px}
+  .dot{width:32px;height:32px;font-size:var(--fs-sm)}
+  .dot .ic{width:17px;height:17px}
+  .card{padding:var(--s4)}
+  .card h2{font-size:1.1875rem}
+  .explain>div{grid-template-columns:minmax(0,1fr);gap:0}
+  .shot-img{padding:var(--s2)}
+  .shot figcaption{align-items:flex-start;flex-wrap:wrap}
+  .shot-open{min-height:44px}
+  .ui{display:inline;white-space:normal;box-decoration-break:clone;-webkit-box-decoration-break:clone}   /* rótulos longos do site quebram linha em vez de alargar a página */
+  .pager button{flex:1 1 100%}
+  .pager button.next{margin-left:0}
+  .help{padding:var(--s4)}
+}
+@media (pointer:coarse){.btn{min-height:44px}.mod-steps button{min-height:44px}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<!-- Ícones: um único conjunto, traço de 1,75 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.8 2.8L16.2 9.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 4.2L2.6 17.5a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0zM12 9.5v4M12 17h.01"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M3 17l5-5 4 4 3-3 6 6"/></symbol>
+</svg>
+
+<button type="button" class="skip" id="skip">Ir para o conteúdo</button>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <button type="button" class="btn menu-btn" id="menuBtn" aria-controls="menu" aria-expanded="false"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg><span>Menu</span></button>
+    <div class="brand"><b class="brand-name">Stoky <small>B2B</small></b><span class="brand-sub">Guia passo a passo para comprar no site</span></div>
+    <div class="progress"><span id="progTxt" aria-live="polite">0 de 0 passos</span><div class="bar" id="progBar" role="progressbar" aria-label="Progresso do guia" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="progFill"></i></div></div>
+  </div>
+</header>
+<div class="scrim" id="scrim" hidden></div>
+<div class="shell">
+  <nav class="menu" id="menu" aria-label="Etapas do tutorial">
+    <div class="menu-head"><p class="menu-title">Etapas</p><button type="button" class="btn menu-close" id="menuClose"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-x"/></svg><span>Fechar</span></button></div>
+    <div id="menuList"></div>
+  </nav>
+  <main id="main" tabindex="-1"></main>
+</div>
+
+<dialog class="lightbox" id="lightbox" aria-labelledby="lbCap">
+  <div class="lb-bar">
+    <p id="lbCap"></p>
+    <button type="button" class="btn" id="lbMode" hidden></button>
+    <button type="button" class="btn" id="lbClose" autofocus><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-x"/></svg><span>Fechar</span></button>
+  </div>
+  <div class="lb-stage" id="lbStage" tabindex="0" role="group" aria-label="Imagem ampliada. Use as setas do teclado para percorrer a imagem."></div>
+</dialog>
+
+<script>
+const UI=(c,t)=>`<span class="ui ui-${c}">${t}</span>`;
+const G=t=>UI('g',t), D=t=>UI('d',t), O=t=>UI('o',t);
+
+const MODULES=[
+{id:"inicio",title:"Boas-vindas",eyebrow:"Antes de começar",
+ lead:"Olá! Este guia mostra, passo a passo, como fazer seus pedidos no site da Stoky. Siga as etapas na ordem ou use o menu para ir direto ao que precisa.",
+ need:["Computador ou celular com internet","CNPJ ou CPF da sua empresa","Um e-mail que você acessa"],
+ steps:[
+ {title:"Abra o site",body:`<p>Digite no navegador: <strong>b2b.stoky.com.br</strong></p><p>Você já consegue ver os produtos, mas os <strong>preços só aparecem depois de entrar</strong> com seu acesso. No lugar do preço aparece o aviso ${G("Faça login ou cadastre-se para visualizar os preços")}.</p>`,
+  shot:{src:"img/01-inicio.jpg",cap:"Página inicial, antes de entrar",
+   what:"A primeira tela do site, a vitrine da Stoky. Aqui você vê os produtos, mas ainda sem preços.",
+   about:"Mostrar o que a loja oferece e levar você até a entrada do site.",
+   how:`<ul><li><strong>Topo, à direita:</strong> ${O("Entre ou cadastre-se")} é por onde você entra. É o próximo passo do guia.</li><li><strong>Campo “Buscar por...”:</strong> procure produtos pelo nome ou código.</li><li><strong>Ícone do WhatsApp:</strong> fale com a nossa equipe.</li><li><strong>Faixa verde de departamentos:</strong> Agropecuária, Automotivo, Construção e outros. Clique para ver os produtos de cada um.</li><li><strong>Coluna da esquerda:</strong> atalhos para Lançamentos, Promoções e Mais Vendidos, e a lista de categorias.</li><li><strong>Barra verde no alto:</strong> atalhos para Produtos, dúvidas sobre o site, Fale Conosco e Catálogo.</li></ul>`}},
+ {title:"Como usar este guia",body:`<ul><li>Cada etapa é um caminho: siga os passos de cima para baixo.</li><li>Quando entender um passo, clique em <strong>Entendi</strong>. O menu marca o que você já viu.</li><li>Os rótulos coloridos, como ${G("Entrar")}, mostram o botão que você vai encontrar na tela.</li></ul>`},
+ {title:"Pronto para começar",body:`<p>Vamos para a primeira etapa: entrar no site.</p>`}
+ ]},
+{id:"acesso",title:"Entrar no site",eyebrow:"Etapa 1",
+ lead:"Aqui você descobre qual é o seu caso e como conseguir o acesso. É rápido.",
+ steps:[
+ {title:"Clique em “Entre ou cadastre-se”",where:"No canto superior direito da página",body:`<p>Vai abrir uma janela com o logo da Stoky e três opções.</p>`,
+  shot:{src:"img/02-entrar.jpg",cap:"Janela “Entre ou cadastre-se”",
+   what:"A porta de entrada do site. É aqui que você entra com seu acesso ou pede um.",
+   about:"Confirmar quem você é, para mostrar os preços e as condições da sua empresa.",
+   how:`<ul><li><strong>CNPJ/CPF ou e-mail</strong> e <strong>Senha</strong>: preencha e clique em ${G("Entrar")}. Use isso se você já tem acesso.</li><li><strong>Olhinho no campo Senha:</strong> mostra o que você digitou, para conferir.</li><li><strong>Esqueceu sua senha?</strong> Clique aqui para receber um link de troca no seu e-mail.</li><li>${D("Sou cliente mas ainda não tenho acesso")}: sua empresa já compra com a Stoky, mas você ainda não usa o site.</li><li>${D("Ainda não sou cliente")}: para fazer o cadastro da sua empresa.</li><li>O <strong>X</strong> no canto fecha a janela.</li></ul>`}},
+ {choice:true,title:"Qual é o seu caso?",paths:[
+   {label:"Já tenho acesso",who:"Você já entrou no site antes ou recebeu sua senha.",steps:[`Em <strong>CNPJ/CPF ou e-mail</strong>, digite seu dado de acesso.`,`Em <strong>Senha</strong>, digite sua senha. O olhinho mostra o que você digitou.`,`Clique em ${G("Entrar")}.`]},
+   {label:"Já compro com a Stoky, mas não tenho acesso ao site",who:"Sua empresa já é nossa cliente, mas você ainda não usa o novo site.",steps:[`Clique em ${D("Sou cliente mas ainda não tenho acesso")}.`,`Preencha seus dados pessoais.`,`Informe o CNPJ da empresa, aceite os termos e envie.`,`Assim que nossa equipe liberar, você já pode entrar com ${G("Entrar")}.`,`<em>Veja as telas logo abaixo.</em>`]},
+   {label:"Ainda não sou cliente",who:"Sua empresa nunca comprou com a Stoky.",steps:[`Clique em ${D("Ainda não sou cliente")}.`,`Preencha os <strong>Dados da Empresa</strong>.`,`Preencha os <strong>Dados do Sócio</strong> e envie.`,`Nossa equipe analisa o cadastro e libera seu acesso.`,`<em>Veja as telas logo abaixo.</em>`]}
+ ]},
+ {title:"Já sou cliente: pedir acesso (parte 1 de 2)",where:"Botão “Sou cliente mas ainda não tenho acesso”",body:`<p>Abre a janela <strong>Solicitação de acesso</strong>. A primeira parte é sobre <strong>você</strong>, a pessoa que vai usar o site.</p>`,
+  shot:{src:"img/03-acesso-1.jpg",cap:"Solicitação de acesso: Dados do usuário",
+   what:"Formulário para quem já compra com a Stoky e quer usar o site pela primeira vez.",
+   about:"Criar o seu usuário. Na próxima parte você liga esse usuário à sua empresa.",
+   how:`<ol><li>Preencha <strong>Nome</strong> e <strong>Email</strong>. Os campos com <strong style="color:#d33">*</strong> são obrigatórios.</li><li>Se quiser, informe também data de nascimento, WhatsApp ou celular e CPF.</li><li><strong>Senha (opcional):</strong> você já pode escolher sua senha aqui.</li><li>Clique em ${UI('d','Vincular cliente(s)')} para seguir.</li></ol>`}},
+ {title:"Já sou cliente: pedir acesso (parte 2 de 2)",body:`<p>Agora você informa <strong>de qual empresa</strong> você é. Se você atende mais de uma empresa, pode informar vários CNPJs ou CPFs.</p>`,
+  shot:{src:"img/03-acesso-2.jpg",cap:"Solicitação de acesso: Vincular clientes",
+   what:"A parte em que você liga o seu usuário à empresa que já compra com a Stoky.",
+   about:"Mostrar à nossa equipe qual cadastro liberar para você.",
+   how:`<ol><li>Digite o <strong>CNPJ</strong> da empresa. Se a compra é feita no seu CPF, marque <strong>Usar CPF</strong>.</li><li>Clique em ${G("Consultar")} para encontrar o cadastro.</li><li>Marque a caixa <strong>Eu aceito e concordo</strong> com os Termos e Condições de Uso e o Termo de Tratamento de Dados. Você pode clicar nos nomes em verde para ler.</li><li>Clique em ${G("Enviar")}. O botão só fica ativo depois de aceitar os termos.</li><li>Errou algo na primeira parte? Use ${O("← Voltar")}.</li></ol>`},
+  tip:"Pronto! Agora é só aguardar. Assim que nossa equipe liberar, você entra pelo botão Entrar com seu e-mail ou CNPJ/CPF e senha."},
+ {title:"Novo cliente: cadastro (parte 1 de 2)",where:"Botão “Ainda não sou cliente”",body:`<p>Abre a página <strong>Cadastro de Revendedor</strong>. A primeira parte é sobre a <strong>sua empresa</strong>.</p>`,
+  shot:{src:"img/04-cadastro-1.jpg",cap:"Cadastro de Revendedor: Dados da Empresa",
+   what:"O cadastro para empresas que ainda não compram com a Stoky.",
+   about:"Enviar os dados da sua empresa para nossa equipe analisar e liberar suas compras.",
+   how:`<ol><li><strong>Informações:</strong> Nome fantasia, CNPJ, Razão social, CNAE e Data de fundação. A Inscrição municipal é opcional.</li><li><strong>Endereço:</strong> comece pelo CEP e complete rua, número, complemento, bairro, estado e cidade.</li><li><strong>Contato:</strong> telefone, WhatsApp e e-mail da empresa.</li><li>Marque <strong>Eu aceito e concordo</strong> com os Termos e Condições de Uso e o Termo de Tratamento de Dados.</li><li>Clique em ${G("Prosseguir")}. O botão só fica ativo depois de aceitar os termos.</li></ol>`},
+  tip:"Os campos com * são obrigatórios. Tenha o cartão CNPJ em mãos: ele já traz razão social, CNAE e data de fundação."},
+ {title:"Novo cliente: cadastro (parte 2 de 2)",body:`<p>Agora preencha os dados do <strong>sócio</strong> responsável pela empresa.</p>`,
+  shot:{src:"img/05-cadastro-2.jpg",cap:"Cadastro de Revendedor: Dados do Sócio",
+   what:"A segunda e última parte do cadastro, com os dados pessoais do sócio.",
+   about:"Identificar o responsável pela empresa.",
+   how:`<ol><li><strong>Informações:</strong> Nome, CPF, RG, Órgão emissor, Data de nascimento, Naturalidade, Estado civil e Sexo.</li><li><strong>Endereço</strong> do sócio: comece pelo CEP.</li><li><strong>Contato:</strong> telefone, celular e e-mail.</li><li>Confira se a caixa dos <strong>Termos e Condições</strong> está marcada.</li><li>Clique em ${G("Enviar")}. Para corrigir os dados da empresa, use ${O("Voltar")}.</li></ol>`},
+  tip:"Cadastro enviado! Nossa equipe vai analisar os dados e liberar seu acesso. Depois disso é só entrar pelo botão Entrar."},
+ {title:"Pronto, você entrou",body:`<p>No lugar de “Entre ou cadastre-se” agora aparece ${O("Área do cliente")}, e os preços passam a aparecer nos produtos.</p>`,
+  shot:{src:"img/07-logado.jpg",cap:"Página inicial, depois de entrar",
+   what:"A mesma página inicial, agora com o seu acesso. Ela mostra seus preços e libera as compras.",
+   about:"Ser o ponto de partida das suas compras.",
+   how:`<ul><li><strong>Área do cliente</strong> (topo): seus pedidos, notas, boletos e dados. Veja a Etapa 6.</li><li><strong>Ícone do carrinho</strong> (topo, à direita): o número vermelho mostra quantos produtos já estão nele.</li><li><strong>Preço</strong> em cada produto. Se tiver desconto, o valor antigo aparece riscado e a porcentagem aparece na foto, como <span class="tag t-pct">-18%</span>.</li><li><strong>Etiqueta de estoque</strong>, como <span class="tag t-ok">NORMAL</span>.</li><li>Os botões <kbd>−</kbd> e <kbd>+</kbd> colocam o produto no carrinho direto daqui. A lixeira zera a quantidade.</li><li><strong>Vende de 1 em 1</strong> mostra de quanto em quanto a quantidade sobe.</li></ul>`},
+  tip:"Os preços que você vê são os da sua empresa. Por isso é preciso entrar antes de comprar."},
+ {title:"Esqueceu a senha?",where:"Na janela de entrada, abaixo do campo Senha",body:`<p>Sem problema, dá para criar uma nova senha em poucos minutos.</p>`,
+  shot:{src:"img/06-senha.jpg",cap:"Janela “Esqueceu sua senha?”",
+   what:"A tela para recuperar o acesso quando você não lembra a senha.",
+   about:"Enviar para o seu e-mail um código para você criar uma senha nova.",
+   how:`<ol><li>Na janela de entrada, clique em <strong>Esqueceu sua senha?</strong></li><li>Digite o <strong>CNPJ/CPF ou e-mail</strong> que você usa para entrar no site.</li><li>Clique em ${G("Enviar email com código de recuperação de senha")}.</li><li>Vai aparecer uma <strong>caixinha para digitar o código</strong>. Abra seu e-mail, copie o código que a Stoky enviou e digite na caixinha.</li><li>Siga as instruções do e-mail para criar a nova senha.</li></ol>`},
+  tip:"Não achou o e-mail? Dê uma olhada na caixa de spam ou lixo eletrônico."}
+ ]},
+{id:"buscar",title:"Encontrar produtos",eyebrow:"Etapa 2",
+ lead:"Existem várias formas de achar o que você precisa. Use a que for mais fácil para você.",
+ steps:[
+ {title:"Pesquise pelo nome ou código",where:"Campo “Buscar por...” no topo da página",body:`<p>Digite o nome do produto (por exemplo, <em>torneira</em>) ou o código, e aperte <kbd>Enter</kbd> ou clique na lupa.</p>`,tip:"Se souber o código do produto (o número com #, como #43274), a busca fica ainda mais certeira. Para apagar o que digitou, clique no X dentro do campo.",
+  shot:{src:"img/08-busca.jpg",cap:"Resultado da busca por “torneira”",
+   what:"A lista de produtos encontrados para o que você pesquisou.",
+   about:"Comparar os produtos, ver preço e estoque e já colocar no carrinho.",
+   how:`<ul><li><strong>Cada quadro é um produto</strong>, com foto, nome, código (#), embalagem, preço e estoque.</li><li><strong>Barra acima dos produtos:</strong> os filtros rápidos (coração para favoritos, varinha para sugestões e carrinho para o que você já comprou), a <strong>ordem</strong> da lista (Descrição de A a Z) e <strong>Limpar filtros</strong>. Mais detalhes no passo “Organize os resultados”.</li><li><strong>Visualização</strong> (à direita): troque entre lista e grade, ou use o raio para a compra rápida.</li><li><strong>Coluna da esquerda:</strong> refine por categoria ou marca. O número entre parênteses mostra quantos produtos da busca estão em cada uma.</li><li>Use <kbd>−</kbd> e <kbd>+</kbd> para colocar no carrinho. Quando aparece <strong>Produto Indisponível</strong>, ele está sem estoque.</li></ul>`}},
+ {title:"Ou navegue por departamentos e marcas",where:"“Todos os departamentos”, na faixa verde, e coluna da esquerda",body:`<ul><li>Clique em <strong>Todos os departamentos</strong> para abrir a lista completa, ou direto no nome de um deles na faixa verde.</li><li>Na esquerda, marque uma ou mais <strong>Categorias</strong> (Construção, Ferragens, Ferramentas…) e <strong>Marcas</strong>. Cada uma tem um campo para pesquisar.</li><li>O número entre parênteses mostra quantos produtos existem ali.</li></ul>`,
+  shot:{src:"img/09-departamentos.jpg",cap:"Menu “Todos os departamentos” aberto",
+   what:"A lista de todos os departamentos da loja.",
+   about:"Encontrar produtos por tipo, quando você não sabe o nome exato.",
+   how:`<ol><li>Passe o mouse ou clique em <strong>Todos os departamentos</strong>, na faixa verde.</li><li>Escolha um departamento, por exemplo <strong>Hidráulica</strong> ou <strong>Tintas</strong>.</li><li>Para ver tudo de uma vez, clique em <strong>+ Ver Tudo</strong>.</li></ol>`}},
+ {title:"Aproveite as vitrines",where:"Coluna da esquerda e página inicial",body:`<p><strong>Lançamentos</strong> mostra as novidades, <strong>Promoções</strong> traz ofertas por tempo limitado e <strong>Mais Vendidos</strong> reúne os produtos mais procurados.</p>`},
+ {title:"Organize os resultados",where:"Barra acima da lista de produtos",body:`<ul><li><strong>Ordenar</strong>: muda a ordem da lista (por exemplo, descrição de A a Z).</li><li><strong>Limpar filtros</strong>: volta a mostrar tudo.</li><li><strong>Filtros rápidos</strong> (ícones à esquerda):<div class="legend" style="margin-top:6px"><strong>Coração</strong><span>seus produtos <strong>favoritos</strong>.</span><strong>Varinha</strong><span><strong>sugestões</strong> de produtos feitas por inteligência artificial para você.</span><strong>Carrinho</strong><span>produtos que você <strong>comprou nos últimos</strong> 30, 60, 90 ou 180 dias.</span></div></li><li><strong>Visualização</strong> (à direita): os dois primeiros ícones trocam o jeito de mostrar os produtos (lista ou grade). O <strong>raio</strong> ativa a <strong>compra rápida</strong>.</li></ul>`},
+ {title:"Entenda as etiquetas do produto",body:`<div class="legend">
+   <span class="tag t-nc">NC</span><span>Produto que sua empresa <strong>nunca comprou</strong>.</span>
+   <span class="tag t-pct">-8%</span><span>Desconto aplicado. O preço riscado é o valor sem desconto.</span>
+   <span class="tag t-ok">NORMAL</span><span>Estoque disponível.</span>
+   <span class="tag t-low">ESTOQUE BAIXO</span><span>Restam poucas unidades.</span>
+   <span class="tag t-out">SEM ESTOQUE</span><span>Produto indisponível no momento.</span></div>`,tip:"<b>Vende de 6 em 6</b> quer dizer que o produto é vendido em múltiplos de 6. Ao clicar em +, a quantidade sobe de 6 em 6."}
+ ]},
+{id:"produto",title:"Página do produto",eyebrow:"Etapa 3",
+ lead:"Clique no nome ou na foto de um produto para ver todos os detalhes antes de comprar.",
+ steps:[
+ {title:"Veja as fotos",body:`<p>Clique duas vezes na foto para aproximar (zoom) e mais duas para voltar.</p>`},
+ {title:"Confira as informações principais",body:`<p>Tudo o que você precisa para decidir a compra fica no topo da página.</p>`,
+  shot:{src:"img/10-produto.jpg",cap:"Página do produto: parte de cima",
+   what:"A página com todos os detalhes de um produto.",
+   about:"Conferir se é o produto certo, ver o preço da sua empresa e escolher a quantidade.",
+   how:`<ul><li><strong>Caminho no topo</strong> (casinha › Hidráulica › Registros): mostra onde o produto fica na loja. Clique em um nome para ver produtos parecidos.</li><li><strong>Fotos:</strong> as miniaturas ficam à esquerda. Clique duas vezes na foto grande para dar zoom.</li><li><strong>Nome, código e marca</strong> logo abaixo do título.</li><li><strong>Etiquetas</strong> à direita: estoque (<span class="tag t-ok">NORMAL</span>), <span class="tag t-nc">NC</span> se sua empresa nunca comprou e o desconto (<span class="tag t-pct">-15%</span>).</li><li><strong>Departamento, categoria e marca</strong>. Clique em qualquer um para ver outros produtos iguais.</li><li><strong>Preço:</strong> o valor riscado é o preço sem desconto. O número grande em verde é o <strong>seu preço</strong>.</li><li><strong>Quantidade:</strong> use <kbd>−</kbd> e <kbd>+</kbd>. A lixeira tira o produto do carrinho.</li><li><strong>Botão verde ${G("?")}</strong> no canto superior direito: explica cada parte da página.</li></ul>`}},
+ {title:"Escolha a quantidade",body:`<p>Use os botões <kbd>−</kbd> e <kbd>+</kbd> em <strong>Quantidade</strong>. O produto vai para o carrinho automaticamente.</p>`,tip:"Logo abaixo aparece a regra de venda, por exemplo: “Produto vende de 1 em 1”."},
+ {title:"Precisa de mais detalhes?",body:`<p>Desça a página até <strong>Ficha técnica</strong>: embalagem, unidade, código de barras, peso e NCM.</p><p>O botão verde ${G("?")} no canto da página explica cada parte da tela.</p>`,
+  shot:{src:"img/11-ficha.jpg",cap:"Informações do produto e Ficha técnica",
+   what:"A parte de baixo da página do produto, com a descrição e os dados técnicos.",
+   about:"Tirar dúvidas antes de comprar e conferir dados para o seu estoque ou nota fiscal.",
+   how:`<ul><li><strong>Embalagem</strong> e <strong>Unidade</strong>: como o produto é vendido (por exemplo, UN = unidade).</li><li><strong>Caixa fechada</strong>: quantidade que vem na caixa fechada.</li><li><strong>Cód. barras</strong>: o código EAN da etiqueta do produto.</li><li><strong>Cód. fabricante</strong>: a referência do fabricante.</li><li><strong>Peso bruto e líquido</strong>, em quilos.</li><li><strong>Class. fiscal (NCM)</strong>: o código usado na nota fiscal.</li></ul>`}}
+ ]},
+{id:"carrinho",title:"Montar o carrinho",eyebrow:"Etapa 4",
+ lead:"Junte todos os produtos que você quer comprar. Você pode revisar tudo antes de enviar o pedido.",
+ steps:[
+ {title:"Adicione produtos",body:`<p>Na lista de produtos ou na página do produto, clique em <kbd>+</kbd>. O número no ícone do carrinho (no topo) aumenta.</p>`},
+ {title:"Abra o carrinho",where:"Ícone de carrinho no topo, ao lado de Área do cliente",body:`<p>Abre um painel lateral com os produtos, a forma de cobrança e o <strong>Total do pedido</strong>. Lá você escolhe:</p><ul><li>${O("Ver carrinho")} para revisar com calma</li><li>${G("Ir p/ pagamento")} para finalizar direto</li></ul>`,
+  shot:{src:"img/12-painel.jpg",cap:"Painel lateral do carrinho (valores ocultos)",
+   what:"Uma visão rápida do seu carrinho, que abre na lateral sem sair da página.",
+   about:"Conferir o que já está no carrinho e ajustar quantidades enquanto continua comprando.",
+   how:`<ul><li><strong>Topo:</strong> o número do seu carrinho, a <strong>Cobrança</strong> e o <strong>Plano</strong> de pagamento escolhidos. A setinha à direita permite trocar.</li><li><strong>Cada produto</strong> mostra código, etiquetas, preço e <strong>Total</strong> da linha.</li><li>Use <kbd>−</kbd> e <kbd>+</kbd> para mudar a quantidade, ou a <strong>lixeira vermelha</strong> para tirar o produto.</li><li><strong>Total Pedido</strong> no rodapé: soma de tudo.</li><li>O <strong>X</strong> no canto fecha o painel.</li></ul>`},
+  tip:"O carrinho é salvo automaticamente. Se fechar o site, seus produtos continuam lá quando você voltar."},
+ {title:"Revise o carrinho",where:"Página “Ver carrinho”",body:`<ul><li>Mude quantidades com <kbd>−</kbd> e <kbd>+</kbd>.</li><li>Para tirar um produto, clique na <strong>lixeira</strong>. Para tirar vários, marque e clique em ${UI('o','Remover selecionados')}.</li><li>${UI('o','Limpar carrinho')} apaga tudo. Use com cuidado.</li></ul>`,
+  shot:{src:"img/13-carrinho.jpg",cap:"Página “Ver carrinho” (valores ocultos)",
+   what:"A página completa do carrinho, para revisar o pedido com calma antes de pagar.",
+   about:"Ajustar produtos e quantidades, adicionar o que faltou e decidir se vai pagar agora ou salvar para depois.",
+   how:`<ul><li><strong>Esqueceu de algum produto?</strong> (topo): a compra rápida por código. Veja o próximo passo.</li><li><strong>Produtos no seu orçamento:</strong> a lista do que você vai comprar, com preço e total de cada linha.</li><li><strong>Caixinhas à esquerda:</strong> marque produtos para tirar vários de uma vez com ${UI('o','Remover selecionados')}.</li><li><strong>Resumo do pedido</strong> (à direita): total dos itens e total do pedido.</li><li>Logo abaixo ficam os botões ${O("Salvar como orçamento")}, ${O("Continuar comprando")}, ${G("Prosseguir para pagamento")} e <strong>Baixar carrinho em XLSX</strong>.</li></ul>`}},
+ {title:"Compra rápida: adicione pelo código",where:"Topo da página do carrinho, em “Esqueceu de algum produto?”",body:`<ol><li>Digite o <strong>código do produto</strong>.</li><li>Informe a <strong>quantidade</strong>.</li><li>Clique em ${G("Adicionar")}.</li></ol>`,tip:"Ideal para quem já sabe os códigos e quer montar um pedido grande sem procurar um por um."},
+ {title:"Quer decidir depois?",body:`<ul><li>${O("Salvar como orçamento")} guarda o carrinho. Ele fica em <strong>Área do cliente › Orçamentos</strong>.</li><li><strong>Baixar carrinho em XLSX</strong> gera uma planilha com os itens.</li><li>${O("Continuar comprando")} volta para os produtos.</li></ul>`},
+ {title:"Tudo certo? Vá para o pagamento",body:`<p>Clique em ${G("Prosseguir para pagamento")}.</p>`}
+ ]},
+{id:"pedido",title:"Finalizar o pedido",eyebrow:"Etapa 5",
+ lead:"Última etapa da compra. Preencha de cima para baixo e envie.",
+ steps:[
+ {title:"Conheça a tela de pagamento",where:"Botão “Prosseguir para pagamento” ou “Ir p/ pagamento”",body:`<p>É aqui que você escolhe como pagar e como receber. Os passos abaixo explicam cada parte.</p>`,
+  shot:{src:"img/14-checkout.jpg",cap:"Tela de pagamento (checkout), com valores ocultos",
+   what:"A última tela antes de enviar o seu pedido.",
+   about:"Definir pagamento, entrega e observações, e confirmar o valor final.",
+   how:`<ul><li><strong>Lado esquerdo, de cima para baixo:</strong> forma de pagamento, condição de pagamento, como receber a compra, observações de entrega, observações do pedido e <strong>Tipo de Entrega</strong>.</li><li><strong>Lado direito:</strong> cupom de desconto, resumo do que você escolheu (Forma de cobrança e Parcelamento), o <strong>Total</strong> e o botão ${G("Enviar pedido")}.</li><li>Se faltar algo obrigatório, aparece um aviso em vermelho acima do botão, por exemplo: <em>“O campo Tipo de Entrega do pedido é obrigatório”</em>.</li><li>Quer mudar algum produto? Clique em ${G("← Voltar para o carrinho")} no topo.</li></ul>`}},
+ {title:"Escolha a forma de pagamento",body:`<p>Por exemplo: Cartão de crédito, Boleto, Depósito bancário, entre outras.</p>`,tip:"As opções que aparecem são as liberadas para a sua empresa."},
+ {title:"Escolha a condição de pagamento",body:`<p>Por exemplo: À vista ou À vista PIX. Abaixo de cada opção aparece o <strong>valor mínimo</strong> do pedido para usá-la.</p>`},
+ {title:"Informe como quer receber",where:"“Tipo de Entrega”, em Informações adicionais (final da página)",body:`<p>Escolha uma opção: <strong>Praça</strong>, <strong>Entrega</strong>, <strong>Retira</strong> (você busca na loja) ou <strong>Transportadora</strong>.</p>`,warn:"Este campo é obrigatório. Sem ele o pedido não é enviado."},
+ {title:"Deixe observações, se precisar",body:`<ul><li><strong>Observações de entrega</strong>: horário, ponto de referência, quem vai receber.</li><li><strong>Observações de pedido</strong>: qualquer recado sobre a compra.</li></ul>`,tip:"Precisa falar com seu vendedor? Escreva o pedido de atendimento no campo de observações."},
+ {title:"Tem cupom de desconto?",body:`<p>Digite o código em <strong>Possui um cupom de desconto?</strong> e clique em ${O("Aplicar")}.</p>`},
+ {title:"Confira o total e envie",body:`<p>Confira o <strong>Total</strong> no resumo e clique em ${G("Enviar pedido")}.</p>`},
+ {title:"Pedido enviado!",body:`<p>A <strong>confirmação aparece na tela</strong>. Depois você acompanha tudo em <strong>Área do cliente › Pedidos</strong>.</p>`,
+  shot:{src:"img/15-confirmacao.jpg",cap:"Confirmação do pedido (dados ocultos)",
+   what:"A tela que confirma que a Stoky recebeu o seu pedido.",
+   about:"Mostrar o número do pedido e um resumo de tudo o que você escolheu.",
+   how:`<ul><li><strong>Mensagem verde no topo:</strong> confirma o pedido e mostra o <strong>número</strong>. Anote esse número: é por ele que você acompanha o pedido em <strong>Área do cliente › Pedidos</strong>.</li><li><strong>Resumo:</strong> cobrança, plano de pagamento, tipo de frete, transportadora e as observações que você escreveu.</li><li><strong>Produtos:</strong> cada item com o valor unitário, a quantidade e o total.</li><li>No final, a quantidade de itens, o subtotal e o <strong>total</strong>.</li><li>Clique em ${G("Voltar para a página inicial")} para continuar comprando.</li></ul>`},
+  tip:"Precisa mudar algo depois de enviar? Fale com a gente pelo WhatsApp, informando o número do pedido."}
+ ]},
+{id:"area",title:"Área do cliente",eyebrow:"Etapa 6",
+ lead:"Depois de comprar, é aqui que você acompanha pedidos, baixa notas e boletos e cuida da sua conta.",
+ steps:[
+ {title:"Abra a Área do cliente",where:"Canto superior direito",body:`<p>Clique em ${O("Área do cliente")}. Abre um menu com todas as opções abaixo.</p>`,
+  shot:{src:"img/16-menu-area.jpg",cap:"Menu da Área do cliente aberto",
+   what:"O menu com tudo o que você pode fazer depois de comprar.",
+   about:"Levar você direto aos seus pedidos, notas, boletos e dados da conta.",
+   how:`<ul><li><strong>Loja e Filial</strong> (no alto): mostram com qual empresa e filial você está comprando agora.</li><li><strong>Avisos:</strong> novidades sobre suas compras e sua parte financeira.</li><li><strong>Os outros itens</strong>, de Minha Conta a Campanhas Comerciais, têm cada um o seu passo logo abaixo, na mesma ordem do menu.</li><li><strong>Deslogar</strong> (no final): sai do site com segurança.</li></ul>`}},
+ {title:"Avisos",body:`<p>Aqui chegam as <strong>novidades sobre suas compras e sua parte financeira</strong>, como movimentações de pedidos e boletos. Quando não houver nada novo, a página mostra “Nenhum aviso encontrado no momento”.</p>`},
+ {title:"Minha conta",body:`<ul><li>Veja e altere seus dados cadastrais.</li><li><strong>Redefinir senha</strong>: informe a senha atual, a nova senha duas vezes e clique em ${G("Alterar Senha")}.</li><li><strong>Clientes vinculados</strong>: lojas (CNPJs) que você pode acessar.</li></ul>`,
+  shot:{src:"img/22-minha-conta.jpg",cap:"Minha Conta (dados pessoais ocultos)",
+   what:"A página com o seu perfil, a troca de senha e as empresas ligadas ao seu acesso.",
+   about:"Manter seus dados em dia e trocar a senha quando quiser.",
+   how:`<ul><li><strong>Menu à esquerda:</strong> aparece em todas as páginas da Área do cliente. Clique para ir direto a Pedidos, Notas Fiscais, Boletos e as outras opções.</li><li><strong>Meu perfil:</strong> mostra seu nome, CNPJ/CPF, nascimento, WhatsApp e e-mail. Para alterar, clique em <strong>clicando aqui</strong>, em verde no texto.</li><li><strong>Redefinir senha:</strong> digite a senha atual, a nova senha, repita a nova senha e clique em ${G("Alterar Senha")}.</li><li><strong>Clientes vinculados:</strong> as empresas que você pode atender pelo site, com código, endereço, CNPJ e desde quando é cliente.</li></ul>`}},
+ {title:"Dashboard",body:`<p>Painéis com um resumo visual das suas informações de compra. Os painéis aparecem quando estão configurados para o seu perfil. Se não houver nenhum, a página mostra “Nenhum dashboard disponível”.</p>`},
+ {title:"Orçamentos",body:`<p>Aqui ficam os carrinhos que você salvou com <strong>Salvar como orçamento</strong>, além do carrinho que você está montando agora.</p>`,
+  shot:{src:"img/18-orcamentos.jpg",cap:"Meus orçamentos (dados ocultos)",
+   what:"A lista dos seus orçamentos, ou seja, compras que você montou e deixou para decidir depois.",
+   about:"Retomar uma compra salva sem precisar procurar os produtos de novo.",
+   how:`<ol><li><strong>Filtros no topo:</strong> escolha o período (Data inicial e final), a Situação, a Origem ou digite o número do orçamento. Depois clique em ${G("Pesquisar")}.</li><li><strong>Legenda:</strong> os ícones mostram por onde o orçamento foi feito: Site, Callcenter, Representante ou Outros.</li><li><strong>Meu carrinho:</strong> o quadro com essa aba é o carrinho que você está montando agora.</li><li>Em cada orçamento: ${G("Visualizar")} mostra os itens, ${G("Editar")} abre para alterar e ${O("+ Ações")} serve para <strong>baixar o PDF</strong> ou <strong>duplicar</strong>.</li><li>A setinha e o campo <strong>Criação</strong> à direita mudam a ordem da lista.</li></ol>`}},
+ {title:"Pedidos",body:`<p>Todos os pedidos que você enviou ficam aqui.</p>`,
+  shot:{src:"img/17-pedidos.jpg",cap:"Meus pedidos (dados ocultos)",
+   what:"A lista dos pedidos que você já fez.",
+   about:"Acompanhar suas compras, conferir o que foi pedido e repetir uma compra com poucos cliques.",
+   how:`<ol><li>Escolha o <strong>Mês/Ano</strong> e, se tiver mais de uma, a <strong>Filial</strong>. Clique em ${G("Pesquisar")}.</li><li>Cada quadro mostra o número do pedido (começa com P-), a quantidade de itens, por onde foi feito (Origem) e o total.</li><li>${G("Visualizar")} mostra todos os produtos do pedido.</li><li>${G("Duplicar")} cria um pedido igual, ótimo para repetir uma compra.</li><li>${O("+ Ações")} serve para <strong>baixar o PDF</strong> do pedido.</li></ol>`}},
+ {title:"Notas fiscais",body:`<p>As notas fiscais das suas compras, prontas para baixar.</p>`,
+  shot:{src:"img/19-notas.jpg",cap:"Notas fiscais (dados ocultos)",
+   what:"A lista das notas fiscais emitidas para a sua empresa.",
+   about:"Baixar o DANFE (PDF) para conferência e o XML para o seu contador ou sistema.",
+   how:`<ol><li>Escolha o período em <strong>Data inicial</strong> e <strong>Data final</strong>, ou digite o <strong>Número</strong> da nota. Clique em ${G("Pesquisar")}.</li><li>Marque a <strong>bolinha</strong> à esquerda da nota que você quer.</li><li>Clique em ${O("DANFE")} para baixar o PDF ou em ${O("XML")} para baixar o arquivo XML.</li><li>Cada quadro mostra o número da nota, a quantidade de itens, a data, a filial e o total.</li></ol>`}},
+ {title:"Boletos",body:`<p>Seus boletos em aberto, com vencimento e valor.</p>`,
+  shot:{src:"img/20-boletos.jpg",cap:"Boletos (dados ocultos)",
+   what:"A lista dos boletos da sua empresa.",
+   about:"Saber o que precisa pagar e baixar o boleto para pagamento.",
+   how:`<ol><li>Se tiver mais de uma, escolha a <strong>Filial</strong> e clique em ${G("Pesquisar")}.</li><li>Cada quadro mostra o número do boleto, o tipo de cobrança, o <strong>vencimento</strong> e o <strong>total</strong>.</li><li><strong>Vencido há</strong>, em vermelho, mostra há quantos dias o boleto venceu.</li><li>Clique no <strong>ícone de download</strong> à direita para baixar o boleto.</li><li>O campo <strong>Vencimento</strong> à direita, no topo, muda a ordem da lista.</li></ol>`},
+  tip:"Ficou com dúvida sobre algum boleto? Fale com a gente pelo WhatsApp, no fim da página."},
+ {title:"Relatórios",body:`<p>Relatórios com informações para consulta, como a lista de <strong>campanhas ativas</strong>.</p>`},
+ {title:"SAC",body:`<p>O canal para resolver problemas com um pedido ou uma nota fiscal.</p><ol><li>Clique em ${G("Novo Ticket")}.</li><li>Descreva o que aconteceu e envie.</li><li>Acompanhe a resposta na mesma página. Use os filtros de data, status e tipo para achar seus tickets.</li></ol>`},
+ {title:"FAQ",body:`<p>Respostas para as dúvidas mais comuns, separadas em <strong>Dúvidas</strong>, <strong>Dicas</strong>, <strong>Artigos</strong> e <strong>Tutoriais</strong>. Use a busca no topo para encontrar um assunto.</p>`},
+ {title:"Campanhas comerciais",body:`<p>Mostra as <strong>campanhas e ações comerciais</strong> da Stoky que estão valendo para você. Quando não houver nenhuma, aparece “Nenhuma campanha disponível no momento”.</p>`},
+ {title:"Para sair",body:`<p>No menu da Área do cliente, clique em <strong>Deslogar</strong>. Faça isso sempre que usar um computador compartilhado.</p>`}
+ ]}
+];
+
+/* =========================================================================
+   LÓGICA
+   1. Utilidades  2. Estado  3. Menu  4. Conteúdo  5. Navegação  6. Rolagem
+   7. Ampliação de imagens  8. Menu móvel  9. Suporte  10. Início
+   ========================================================================= */
+
+/* 1. Utilidades ----------------------------------------------------------- */
+const $=(s,r=document)=>r.querySelector(s);
+/* Texto simples vindo dos dados passa por esc(); campos de HTML confiável (body, how, tip, warn, steps) não. */
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ico=(n,c="")=>`<svg class="ic ${c}" aria-hidden="true" focusable="false"><use href="#i-${n}"/></svg>`;
+const plural=(n,um,varios)=>`${n} ${n===1?um:varios}`;
+
+/* Dimensões reais das capturas: reservam espaço antes do carregamento (sem salto de layout). */
+const IMG_SIZE={
+  "img/01-inicio.jpg":[1859,991],"img/02-entrar.jpg":[740,535],"img/03-acesso-1.jpg":[492,633],"img/03-acesso-2.jpg":[490,522],
+  "img/04-cadastro-1.jpg":[894,770],"img/05-cadastro-2.jpg":[895,826],"img/06-senha.jpg":[580,385],"img/07-logado.jpg":[1551,972],
+  "img/08-busca.jpg":[1200,937],"img/09-departamentos.jpg":[670,375],"img/10-produto.jpg":[1205,495],"img/11-ficha.jpg":[1185,540],
+  "img/12-painel.jpg":[355,975],"img/13-carrinho.jpg":[1200,896],"img/14-checkout.jpg":[1185,962],"img/15-confirmacao.jpg":[1232,458],
+  "img/16-menu-area.jpg":[297,551],"img/17-pedidos.jpg":[1205,702],"img/18-orcamentos.jpg":[1205,698],"img/19-notas.jpg":[1205,935],
+  "img/20-boletos.jpg":[1205,725],"img/22-minha-conta.jpg":[1200,795]
+};
+
+/* 2. Estado --------------------------------------------------------------- */
+/* Os ids de passo são "<módulo>-<posição>": inserir ou reordenar passos muda o progresso salvo. */
+const KEY="stoky-guia-v1";
+let done={};
+try{done=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){done={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}};
+const sid=(m,i)=>`${m.id}-${i+1}`;
+const total=MODULES.reduce((n,m)=>n+m.steps.length,0);
+const doneIn=m=>m.steps.filter((s,i)=>done[sid(m,i)]).length;
+
+const root=document.documentElement;
+const menu=$("#menu"), menuList=$("#menuList"), main=$("#main"), scrim=$("#scrim"), menuBtn=$("#menuBtn"), topbar=$(".topbar");
+const mq=matchMedia("(max-width:860px)");
+let current=MODULES[0].id;   // módulo aberto
+let curId=null;              // passo em destaque (rolagem)
+let pinned=null;             // passo escolhido por clique, vale até o usuário rolar
+
+/* 3. Menu lateral --------------------------------------------------------- */
+function updateProgress(){
+  const n=Object.keys(done).filter(k=>done[k]).length, pct=Math.round(n/total*100);
+  $("#progTxt").textContent=`${n} de ${total} passos`;
+  $("#progFill").style.width=pct+"%";
+  const bar=$("#progBar"); bar.setAttribute("aria-valuenow",pct); bar.setAttribute("aria-valuetext",`${n} de ${total} passos concluídos`);
+}
+
+function renderMenu(){
+  const a=document.activeElement;
+  const keep=menu.contains(a)&&(a.dataset.go?`[data-go="${a.dataset.go}"]`:a.dataset.mod?`[data-mod="${a.dataset.mod}"]`:null);
+  menuList.innerHTML=MODULES.map((m,mi)=>{
+    const n=doneIn(m), all=n===m.steps.length, active=m.id===current;
+    return `<div class="mod ${active?'active':''} ${all?'done':''}">
+      <button type="button" class="mod-btn" data-mod="${m.id}" aria-expanded="${active}" aria-controls="steps-${m.id}" ${active?'aria-current="true"':''}>
+        <span class="mod-num">${all?ico("check"):mi}</span><span>${esc(m.title)}</span><span class="mod-count"><span class="sr-only">${n} de ${m.steps.length} passos concluídos</span><span aria-hidden="true">${n}/${m.steps.length}</span></span></button>
+      <ol class="mod-steps" id="steps-${m.id}">${m.steps.map((s,i)=>{const id=sid(m,i), ok=done[id], cur=active&&id===curId;
+        return `<li><button type="button" data-go="${id}" class="${ok?'ok':''} ${cur?'cur':''}" ${cur?'aria-current="location"':''}><span class="ck">${ok?ico("check"):(i+1)+'.'}</span><span>${esc(s.title)}${ok?'<span class="sr-only"> (concluído)</span>':''}</span></button></li>`}).join("")}</ol></div>`}).join("");
+  if(keep){const el=menu.querySelector(keep); if(el) el.focus({preventScroll:true})}
+  updateProgress();
+}
+
+/* 4. Conteúdo ------------------------------------------------------------- */
+/* shot: {src, cap, what (o que é), about (para que serve), how (como usar)} */
+function shotHTML(sh){
+  if(!sh) return "";
+  return [].concat(sh).map(x=>{
+    const sz=IMG_SIZE[x.src], dim=sz?` width="${sz[0]}" height="${sz[1]}"`:"";
+    return `<figure class="shot">
+      <div class="shot-img" data-zoom="${esc(x.src)}" data-cap="${esc(x.cap)}"><img src="${esc(x.src)}" alt="Captura de tela: ${esc(x.cap)}"${dim} loading="lazy" decoding="async"></div>
+      <figcaption><span>${esc(x.cap)}</span><button type="button" class="btn shot-open" data-zoom="${esc(x.src)}" data-cap="${esc(x.cap)}" aria-label="Ampliar imagem: ${esc(x.cap)}">${ico("expand")}Ampliar</button></figcaption></figure>
+    ${x.what?`<dl class="explain">
+      <div><dt>O que é</dt><dd>${x.what}</dd></div>
+      ${x.about?`<div><dt>Para que serve</dt><dd>${x.about}</dd></div>`:''}
+      ${x.how?`<div><dt>Como usar</dt><dd>${x.how}</dd></div>`:''}</dl>`:''}`}).join("");
+}
+
+const dotHTML=(i,ok,choice)=>ok?ico("check"):(choice?"?":i+1);
+
+function nodeHTML(m,s,i){
+  const id=sid(m,i), ok=!!done[id], cur=id===curId;
+  const gotBtn=`<button type="button" class="btn got" data-got="${id}" aria-pressed="${ok}" aria-label="Entendi: ${esc(s.title)}">${ico("circle","got-off")}${ico("check-circle","got-on")}<span>Entendi</span></button>`;
+  const cls=`node${s.choice?' choice':''}${ok?' ok':''}${cur?' is-current':''}`;
+  if(s.choice){
+    return `<li class="${cls}" id="n-${id}"><div class="dot" aria-hidden="true">${dotHTML(i,ok,true)}</div>
+      <div class="card" id="${id}" tabindex="-1"><h2 class="choice-q">${esc(s.title)}</h2>
+      <div class="paths">${s.paths.map(p=>`<div class="path"><h3>${esc(p.label)}</h3><p class="who">${esc(p.who)}</p><ol>${p.steps.map(x=>`<li><span>${x}</span></li>`).join("")}</ol></div>`).join("")}</div>
+      ${gotBtn}</div></li>`;
+  }
+  return `<li class="${cls}" id="n-${id}"><div class="dot" aria-hidden="true">${dotHTML(i,ok,false)}</div>
+    <div class="card" id="${id}" tabindex="-1"><h2>${esc(s.title)}</h2>${s.where?`<p class="where">${ico("pin")}<span>${esc(s.where)}</span></p>`:''}${s.body}${shotHTML(s.shot)}
+    ${s.tip?`<div class="tip">${ico("bulb")}<div><b>Dica</b><span>${s.tip}</span></div></div>`:''}
+    ${s.warn?`<div class="tip warn">${ico("alert")}<div><b>Atenção</b><span>${s.warn}</span></div></div>`:''}
+    ${gotBtn}</div></li>`;
+}
+
+function metaDone(m){return plural(doneIn(m),"concluído","concluídos")}
+
+function renderModule(){
+  const mi=MODULES.findIndex(m=>m.id===current), m=MODULES[mi];
+  const prev=MODULES[mi-1], next=MODULES[mi+1];
+  main.innerHTML=`<div class="view">
+    <header class="mod-head">
+      <h1 id="title" tabindex="-1">${esc(m.title)}</h1>
+      <p class="mod-meta"><span class="chip">${esc(m.eyebrow)}</span><span>${plural(m.steps.length,"passo","passos")}</span><span id="metaDone">${metaDone(m)}</span></p>
+      <p class="lead">${esc(m.lead)}</p>
+      ${m.need?`<div class="need"><strong>Você vai precisar de:</strong>${m.need.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`:''}
+    </header>
+    <ol class="flow" role="list">${m.steps.map((s,i)=>nodeHTML(m,s,i)).join("")}</ol>
+    <nav class="pager" aria-label="Navegação entre etapas">${prev?`<button type="button" data-mod="${prev.id}">${ico("arrow-left")}<span><small>Etapa anterior</small><strong>${esc(prev.title)}</strong></span></button>`:''}
+      ${next?`<button type="button" class="next" data-mod="${next.id}">${ico("arrow-right")}<span><small>Próxima etapa</small><strong>${esc(next.title)}</strong></span></button>`:''}</nav>
+    <section class="help" aria-labelledby="helpT"><span class="help-ic">${ico("chat")}</span>
+      <div class="help-body"><h2 id="helpT">Ficou com dúvida?</h2><p>Fale com a gente no WhatsApp do e-commerce: <b id="zap">(65) 3026-9976</b></p><p>${ico("clock")}<span>Segunda a sexta, das 7h30 às 17h.</span></p></div>
+      <button type="button" class="btn copy" id="copyZap">${ico("copy")}<span>Copiar</span></button><span class="sr-only" role="status" id="copyMsg"></span></section>
+  </div>`;
+}
+
+/* Capturas ausentes: troca a imagem quebrada por um aviso discreto (o evento de erro não borbulha). */
+main.addEventListener("error",e=>{
+  const img=e.target;
+  if(!(img instanceof HTMLImageElement)||!img.closest(".shot-img")) return;
+  const box=img.closest(".shot-img"), cap=box.dataset.cap||"";
+  box.removeAttribute("data-zoom"); box.style.cursor="default";
+  box.innerHTML=`<div class="shot-missing" role="img" aria-label="Captura de tela indisponível: ${esc(cap)}">${ico("image")}<span>Captura de tela indisponível no momento</span></div>`;
+  const b=box.closest(".shot").querySelector(".shot-open"); if(b) b.hidden=true;
+},true);
+
+/* 5. Navegação ------------------------------------------------------------ */
+function go(modId,stepId,{push=true,focus=true}={}){
+  const changed=modId!==current;
+  current=modId;
+  if(changed||!main.firstChild){
+    const m=MODULES.find(x=>x.id===modId);
+    curId=stepId||sid(m,0); pinned=stepId||null;
+    renderModule();
+  }
+  renderMenu();
+  if(push&&location.hash!=="#"+modId) history.pushState(null,"","#"+modId);
+  closeMenu();
+  if(stepId){
+    const el=$("#n-"+stepId);
+    if(el){
+      pinned=stepId; setCurrent(stepId);
+      el.querySelector(".card").scrollIntoView({block:"start"});
+      el.classList.add("flash"); setTimeout(()=>el.classList.remove("flash"),1400);
+      if(focus) el.querySelector(".card").focus({preventScroll:true});
+    }
+  }else if(changed){
+    window.scrollTo({top:0,behavior:"instant"});
+    if(focus) $("#title").focus({preventScroll:true});
+  }
+}
+
+document.addEventListener("click",e=>{
+  const z=e.target.closest("[data-zoom]");
+  if(z){openLightbox(z.dataset.zoom,z.dataset.cap,z); return}
+  const b=e.target.closest("button"); if(!b) return;
+  if(b.dataset.mod) go(b.dataset.mod);
+  else if(b.dataset.go){const m=b.dataset.go.replace(/-\d+$/,""); go(m,b.dataset.go)}
+  else if(b.dataset.got) toggleDone(b);
+  else if(b.id==="copyZap") copyZap(b);
+});
+
+function toggleDone(b){
+  const id=b.dataset.got; done[id]=!done[id]; save();
+  const node=$("#n-"+id), ok=!!done[id], i=+id.split("-").pop()-1;
+  node.classList.toggle("ok",ok);
+  b.setAttribute("aria-pressed",String(ok));
+  $(".dot",node).innerHTML=dotHTML(i,ok,node.classList.contains("choice"));
+  if(ok){node.classList.add("just"); setTimeout(()=>node.classList.remove("just"),400)}
+  const m=MODULES.find(x=>x.id===current), md=$("#metaDone"); if(md) md.textContent=metaDone(m);
+  renderMenu();
+  if(ok){const nxt=node.nextElementSibling; if(nxt){pinned=nxt.id.slice(2); setCurrent(pinned); nxt.querySelector(".card").scrollIntoView({block:"start"})}}
+}
+
+/* O hash guarda só o módulo: #inicio, #acesso, #buscar... */
+function fromHash(){const h=location.hash.slice(1); return MODULES.some(m=>m.id===h)?h:MODULES[0].id}
+window.addEventListener("hashchange",()=>{const h=fromHash(); if(h!==current) go(h,null,{push:false})});
+if("scrollRestoration" in history) history.scrollRestoration="manual";
+
+/* 6. Rolagem: passo atual -------------------------------------------------- */
+function setCurrent(id){
+  if(id===curId) return;
+  curId=id;
+  main.querySelectorAll(".node.is-current").forEach(n=>n.classList.remove("is-current"));
+  const n=$("#n-"+id); if(n) n.classList.add("is-current");
+  menu.querySelectorAll("[data-go].cur").forEach(b=>{b.classList.remove("cur"); b.removeAttribute("aria-current")});
+  const b=menu.querySelector(`[data-go="${id}"]`);
+  if(b){b.classList.add("cur"); b.setAttribute("aria-current","location"); if(!mq.matches) revealInMenu(b)}
+}
+function revealInMenu(b){
+  const r=b.getBoundingClientRect(), nr=menu.getBoundingClientRect();
+  if(r.top<nr.top+8) menu.scrollTop-=nr.top+8-r.top;
+  else if(r.bottom>nr.bottom-8) menu.scrollTop+=r.bottom-nr.bottom+8;
+}
+let ticking=false;
+function spy(){
+  ticking=false;
+  if(pinned) return;
+  const nodes=main.querySelectorAll(".node"); if(!nodes.length) return;
+  const line=topbar.offsetHeight+Math.min(140,innerHeight*.25);
+  let best=nodes[0];
+  for(const n of nodes){ if(n.getBoundingClientRect().top<=line) best=n; else break }
+  setCurrent(best.id.slice(2));
+}
+addEventListener("scroll",()=>{if(!ticking){ticking=true; requestAnimationFrame(spy)}},{passive:true});
+/* Um clique em passo fixa o destaque; qualquer gesto de rolagem devolve o controle à posição da página. */
+["wheel","touchmove"].forEach(t=>addEventListener(t,()=>{pinned=null},{passive:true}));
+addEventListener("keydown",e=>{if(["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"," "].includes(e.key)) pinned=null});
+
+/* 7. Ampliação de imagens -------------------------------------------------- */
+const lb=$("#lightbox"), lbStage=$("#lbStage"), lbMode=$("#lbMode");
+const lbImg=Object.assign(document.createElement("img"),{id:"lbImg",alt:""});   // criada aqui: só existe com uma captura para mostrar
+lbStage.append(lbImg);
+let lbReal=false;
+function lbLayout(){
+  if(!lb.open||!lbImg.naturalWidth) return;
+  const cs=getComputedStyle(lbStage);
+  const aw=lbStage.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+  const ah=lbStage.clientHeight-parseFloat(cs.paddingBottom);
+  const nw=lbImg.naturalWidth, nh=lbImg.naturalHeight;
+  const fit=Math.min(aw/nw,ah/nh,3);
+  lbImg.style.width=Math.round(nw*(lbReal?Math.max(1,fit):fit))+"px";
+  lbMode.hidden=fit>=1;                       // se já cabe em tamanho real, não há o que alternar
+  lbMode.textContent=lbReal?"Ajustar à tela":"Tamanho real";
+}
+function openLightbox(src,cap){
+  lbReal=false; lbStage.scrollTo(0,0);
+  lbImg.alt=cap||""; $("#lbCap").textContent=cap||"";
+  lbImg.onload=lbLayout; lbImg.removeAttribute("style"); lbImg.src=src;
+  lb.showModal(); root.classList.add("no-scroll"); lbLayout();
+}
+lb.addEventListener("close",()=>{root.classList.remove("no-scroll"); lbImg.removeAttribute("src"); lbImg.removeAttribute("style")});
+lb.addEventListener("click",e=>{if(e.target===lb||e.target===lbStage) lb.close()});
+$("#lbClose").addEventListener("click",()=>lb.close());
+lbMode.addEventListener("click",()=>{lbReal=!lbReal; lbStage.scrollTo(0,0); lbLayout()});
+addEventListener("resize",lbLayout);
+
+/* 8. Menu móvel ------------------------------------------------------------ */
+/* Fechado no celular, o menu fica inerte: o foco do teclado não entra nos itens escondidos. */
+function syncInert(){
+  const open=menu.classList.contains("open");
+  menu.inert=mq.matches&&!open;
+  topbar.inert=main.inert=mq.matches&&open;
+}
+function openMenu(){
+  menu.classList.add("open"); scrim.hidden=false; menuBtn.setAttribute("aria-expanded","true");
+  root.classList.add("no-scroll"); syncInert(); $("#menuClose").focus();
+}
+function closeMenu(restoreFocus=false){
+  const was=menu.classList.contains("open");
+  menu.classList.remove("open"); scrim.hidden=true; menuBtn.setAttribute("aria-expanded","false");
+  if(!lb.open) root.classList.remove("no-scroll");
+  syncInert();
+  if(was&&restoreFocus) menuBtn.focus();
+}
+menuBtn.addEventListener("click",()=>menu.classList.contains("open")?closeMenu(true):openMenu());
+$("#menuClose").addEventListener("click",()=>closeMenu(true));
+scrim.addEventListener("click",()=>closeMenu(true));
+addEventListener("keydown",e=>{if(e.key==="Escape"&&menu.classList.contains("open")&&!lb.open) closeMenu(true)});
+mq.addEventListener("change",()=>closeMenu());
+$("#skip").addEventListener("click",()=>{main.focus(); main.scrollIntoView({block:"start"})});
+
+/* 9. Suporte: copiar o telefone -------------------------------------------- */
+function selectZap(){const r=document.createRange(); r.selectNodeContents($("#zap")); const s=getSelection(); s.removeAllRanges(); s.addRange(r)}
+async function copyZap(b){
+  const t="65 3026-9976"; let ok=false;
+  try{await navigator.clipboard.writeText(t); ok=true}catch(err){}
+  if(!ok){                                   // sem Clipboard API (página não segura ou navegador antigo)
+    try{const ta=document.createElement("textarea"); ta.value=t; ta.setAttribute("readonly","");
+      ta.style.cssText="position:fixed;top:0;left:0;opacity:0"; document.body.appendChild(ta); ta.select();
+      ok=document.execCommand("copy"); ta.remove()}catch(err){}
+  }
+  if(!ok) selectZap();
+  const label=$("span",b), msg=$("#copyMsg");
+  label.textContent=ok?"Copiado":"Selecionado";
+  msg.textContent=ok?"Número copiado.":"Número selecionado. Use Ctrl+C para copiar.";
+  setTimeout(()=>{if(b.isConnected){label.textContent="Copiar"; msg.textContent=""}},2000);
+}
+
+/* 10. Início --------------------------------------------------------------- */
+current=fromHash();
+curId=sid(MODULES.find(m=>m.id===current),0);
+renderMenu(); renderModule(); syncInert(); spy();
+</script>
+</body>
+</html>

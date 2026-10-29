@@ -1,0 +1,82 @@
+/*
+  Valores de design do guia (cores, tipografia, espaçamento, formas). Mude aqui e o guia inteiro acompanha.
+  Contraste conferido: texto e botões ≥ 4,5:1 sobre seus fundos.
+*/
+:root {
+  color-scheme: light;
+
+  /* superfícies e texto */
+  --bg: #f4f6f1;
+  --surface: #ffffff;
+  --surface-2: #ecf0e8;
+  --line: #dde3d6;
+  --line-strong: #c3ccb9;
+  --line-control: #7f8c78; /* contorno de botões e campos */
+  --fg: #18211a;
+  --muted: #546055;
+
+  /* ação, progresso e conclusão (o verde da Stoky) */
+  --brand: #1d9a3e; /* só para a marca, em texto grande */
+  --action: #157a35;
+  --action-hover: #0f6429;
+  --action-press: #0b5321;
+  --on-action: #ffffff;
+  --ok-soft: #e3f3e6;
+  --ok-line: #b4dcbc;
+  --ok-text: #0f6429;
+  --focus: #0f6429;
+  --sel: #c4e8cc;
+
+  /* dica (informativa) e atenção */
+  --info: #1b5f8c;
+  --info-soft: #e7f0f7;
+  --info-line: #bcd5e6;
+  --warn: #8a4a05;
+  --warn-soft: #fdf1dc;
+  --warn-line: #ecc78a;
+
+  /* rótulos que imitam o site da Stoky */
+  --ui-dark: #1f2837;
+  --ui-dark-fg: #ffffff;
+  --tag-nc: #b8530f;
+  --tag-ok: #1f7a3a;
+  --tag-low: #e0a100;
+  --tag-low-fg: #1b1b1b;
+  --tag-out: #b3261e;
+  --tag-pct: #d9f1df;
+  --tag-pct-fg: #16672f;
+
+  /* tipografia (escala fixa, razão ≈ 1,2) */
+  --font: "Figtree", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-base: 1.0625rem;
+  --fs-md: 1.1875rem;
+  --fs-lg: 1.3125rem;
+  --fs-2xl: 2.5rem;
+
+  /* espaçamento (base de 4px) */
+  --s1: 0.25rem;
+  --s2: 0.5rem;
+  --s3: 0.75rem;
+  --s4: 1rem;
+  --s5: 1.5rem;
+  --s6: 2rem;
+  --s7: 3rem;
+  --s8: 4.5rem;
+
+  /* forma e profundidade */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-pill: 999px;
+  --sh-1: 0 1px 2px rgba(24, 33, 26, 0.06), 0 1px 3px rgba(24, 33, 26, 0.05);
+  --sh-2: 0 12px 32px rgba(24, 33, 26, 0.16), 0 2px 8px rgba(24, 33, 26, 0.08);
+
+  /* layout e movimento */
+  --topbar-h: 60px;
+  --sidebar-w: 288px;
+  --top: calc(var(--topbar-h) + env(safe-area-inset-top, 0px));
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.18s;
+}

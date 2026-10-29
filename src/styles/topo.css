@@ -1,0 +1,33 @@
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.topbar-in {
+  position: relative; display: flex; align-items: center; gap: var(--s4);
+  height: var(--topbar-h); max-width: 1536px; margin: 0 auto;
+  padding-inline: max(var(--s5), env(safe-area-inset-left, 0px)) max(var(--s5), env(safe-area-inset-right, 0px));
+}
+.brand { display: flex; align-items: center; gap: var(--s3); min-width: 0; }
+.brand-name {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1;
+  color: var(--brand); white-space: nowrap;
+}
+.brand-name small {
+  font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.04em;
+  padding: 3px 7px; border: 1px solid var(--line-strong); border-radius: var(--r-sm); color: var(--muted);
+}
+.brand-sub {
+  color: var(--muted); font-size: var(--fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  padding-left: var(--s3); border-left: 1px solid var(--line);
+}
+.progress {
+  margin-left: auto; display: flex; align-items: center; gap: var(--s3);
+  font-size: var(--fs-sm); font-weight: 600; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.bar { width: 150px; height: 8px; border-radius: var(--r-pill); background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--action); border-radius: inherit; transition: width 0.4s var(--ease); }
+.menu-btn { display: none; }
+.inicio-btn { min-height: 36px; padding: 0 var(--s3); }
+.inicio-btn .ic { width: 18px; height: 18px; }

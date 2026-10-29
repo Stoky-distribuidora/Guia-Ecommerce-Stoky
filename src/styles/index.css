@@ -1,0 +1,15 @@
+/* A ordem importa: é a mesma em que as regras se sobrescrevem. */
+@import "./fonts.css";
+@import "./tokens.css";
+@import "./base.css";
+@import "./topo.css";
+@import "./menu.css";
+@import "./stepper.css";
+@import "./tela.css";
+@import "./ramificacoes.css";
+@import "./capturas.css";
+@import "./avisos.css";
+@import "./rotulos.css";
+@import "./navegacao.css";
+@import "./lightbox.css";
+@import "./responsivo.css";

@@ -1,0 +1,37 @@
+/* captura de tela: moldura + legenda + botão Ampliar */
+.shot { margin: var(--s4) 0 0; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-2); overflow: hidden; }
+.tela-principal > .shot:first-child { margin-top: 0; }
+.shot-img { display: flex; justify-content: center; padding: var(--s3); cursor: zoom-in; }
+.shot-img.erro { cursor: default; }
+.shot-img img { display: block; height: auto; border: 1px solid var(--line); border-radius: var(--r-sm); background: #fff; box-shadow: var(--sh-1); }
+.shot figcaption {
+  display: flex; align-items: center; gap: var(--s3); padding: var(--s2) var(--s2) var(--s2) var(--s4);
+  border-top: 1px solid var(--line); background: var(--surface); font-size: var(--fs-sm); color: var(--muted);
+}
+.shot figcaption span { flex: 1; min-width: 0; }
+.shot-open { min-height: 36px; padding: 0 var(--s3); }
+.shot-open .ic { width: 17px; height: 17px; }
+.shot-missing {
+  display: flex; align-items: center; justify-content: center; gap: var(--s2); min-height: 120px; margin: var(--s3); padding: var(--s4);
+  border: 1px dashed var(--line-control); border-radius: var(--r-sm); color: var(--muted); font-size: var(--fs-sm); text-align: center;
+}
+
+/* conteúdo complementar recolhível: "O que é e para que serve" */
+.explain-mais { margin: var(--s4) 0 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.painel .explain-mais { margin: 0; border-top-color: var(--line-strong); border-bottom: 0; }
+.explain-mais summary {
+  display: flex; align-items: center; gap: var(--s2); min-height: 44px; padding: var(--s2) 0; cursor: pointer; list-style: none;
+  font-size: var(--fs-sm); font-weight: 700; color: var(--muted); transition: color var(--dur);
+}
+.explain-mais summary::-webkit-details-marker { display: none; }
+.explain-mais summary:hover { color: var(--ok-text); }
+.explain-mais summary .ic { width: 18px; height: 18px; transition: transform 0.22s var(--ease); }
+.explain-mais[open] summary .ic { transform: rotate(180deg); }
+
+.explain { margin: 0; }
+.explain > div { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: var(--s1) var(--s5); padding: var(--s3) 0; border-top: 1px solid var(--line); }
+.explain dt { padding-top: 3px; font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.explain dd { margin: 0; font-size: 1rem; line-height: 1.6; }
+.explain dd > :first-child { margin-top: 0; }
+.explain dd > :last-child { margin-bottom: 0; }
+.painel .explain > div { grid-template-columns: minmax(0, 1fr); gap: var(--s1); }

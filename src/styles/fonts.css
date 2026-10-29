@@ -1,0 +1,8 @@
+/* Fonte hospedada aqui mesmo (o guia não depende de serviços externos). Figtree, licença OFL. */
+@font-face {
+  font-family: "Figtree";
+  src: url("../assets/figtree-latin-wght-normal.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}

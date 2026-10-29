@@ -1,0 +1,28 @@
+{
+  "name": "guia-stoky-b2b",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "description": "Guia passo a passo para comprar no site da Stoky (B2B)",
+  "scripts": {
+    "predev": "node scripts/medir-imagens.mjs",
+    "dev": "vite",
+    "prebuild": "node scripts/medir-imagens.mjs",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "verificar": "node scripts/medir-imagens.mjs && tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "image-size": "^2.0.4",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vite-plugin-singlefile": "^2.3.4"
+  }
+}

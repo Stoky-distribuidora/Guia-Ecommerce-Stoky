@@ -1,0 +1,2 @@
+/* fundo escurecido atrás da gaveta do menu (celular) */
+.scrim { position: fixed; inset: 0; z-index: 30; background: rgba(10, 16, 11, 0.45); }

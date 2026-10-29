@@ -1,0 +1,10 @@
+/* Dica (azul) e Atenção (amarela): ícone + rótulo + cor */
+.tip {
+  display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: var(--s3); margin: var(--s4) 0 0; padding: var(--s3) var(--s4);
+  border: 1px solid var(--info-line); border-radius: var(--r-md); background: var(--info-soft); font-size: 1rem; line-height: 1.55;
+}
+.tip .ic { width: 22px; height: 22px; margin-top: 1px; color: var(--info); }
+.tip b { display: block; margin-bottom: 2px; font-size: var(--fs-xs); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--info); }
+.tip b + span { display: block; }
+.tip.warn { border-color: var(--warn-line); background: var(--warn-soft); }
+.tip.warn .ic, .tip.warn b { color: var(--warn); }

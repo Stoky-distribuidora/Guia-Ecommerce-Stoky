@@ -1,0 +1,115 @@
+/* barra horizontal das etapas e sub-abas: fica sob o cabeçalho e rola só ela mesma quando não cabe */
+.stepper {
+  position: sticky; top: var(--top); z-index: 12;
+  margin: 0 0 var(--s5); padding-block: var(--s2);
+  background: var(--bg);
+}
+
+.stepper-trilha {
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent;
+  padding-block: var(--s1);
+  -webkit-overflow-scrolling: touch;
+}
+
+.stepper-trilha ol { display: flex; list-style: none; margin: 0; padding: 0; min-width: max-content; }
+
+.st { position: relative; flex: 1 0 112px; min-width: 96px; }
+
+/* linha que liga uma etapa à seguinte (do centro de uma bolinha ao centro da outra) */
+.st:not(:last-child)::after {
+  content: ""; position: absolute; top: 21px; left: calc(50% + 24px); right: calc(-50% + 24px);
+  height: 2px; background: var(--line-strong); transition: background-color 0.3s;
+}
+.st.feita:not(:last-child)::after { background: var(--action); }
+.st.consulta:not(:last-child)::after { background: none; border-top: 2px dashed var(--line-strong); height: 0; }
+
+.st button {
+  display: flex; flex-direction: column; align-items: center; gap: var(--s2); width: 100%;
+  padding: var(--s1) var(--s2); border: 0; background: none; border-radius: var(--r-md); cursor: pointer; text-align: center;
+}
+.st-bolinha {
+  position: relative; z-index: 1; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%;
+  font-size: var(--fs-sm); font-weight: 700; font-variant-numeric: tabular-nums;
+  background: var(--surface); border: 2px solid var(--line-control); color: var(--muted);
+  transition: background-color var(--dur), border-color var(--dur), color var(--dur), box-shadow var(--dur);
+}
+.st-bolinha .ic { width: 18px; height: 18px; stroke-width: 2.5; }
+.st.consulta .st-bolinha { border-style: dashed; }
+.st-nome { font-size: var(--fs-sm); font-weight: 600; line-height: 1.25; color: var(--muted); text-wrap: balance; transition: color var(--dur); }
+.st button:hover .st-bolinha { border-color: var(--action); color: var(--ok-text); }
+.st button:hover .st-nome { color: var(--fg); }
+.st.feita .st-bolinha { background: var(--action); border-color: var(--action); color: var(--on-action); border-style: solid; }
+.st.atual .st-bolinha { border-color: var(--action); color: var(--ok-text); background: var(--surface); box-shadow: 0 0 0 4px var(--ok-soft); border-style: solid; }
+.st.atual.feita .st-bolinha { background: var(--action); color: var(--on-action); }
+.st.atual .st-nome { color: var(--fg); font-weight: 700; }
+
+/* Sub-abas da etapa ativa: mesmo formato visual de círculos e linhas */
+.stepper-sub {
+  margin-top: var(--s2);
+  padding: var(--s2) var(--s3) var(--s1);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.stepper-sub-header {
+  display: flex; align-items: center; gap: var(--s2);
+  padding-bottom: var(--s1); margin-bottom: var(--s1);
+  border-bottom: 1px solid var(--line);
+}
+.stepper-sub-badge {
+  display: inline-block; padding: 2px 8px; border-radius: var(--r-full);
+  background: var(--ok-soft); color: var(--ok-text); font-weight: 700; font-size: 0.72rem;
+  text-transform: uppercase; letter-spacing: 0.03em;
+}
+.stepper-sub-titulo {
+  font-size: var(--fs-xs); font-weight: 700; color: var(--fg);
+}
+.stepper-sub-contagem {
+  margin-left: auto; font-variant-numeric: tabular-nums; font-size: 0.75rem; color: var(--muted);
+}
+.stepper-sub-trilha {
+  padding-bottom: var(--s1);
+}
+.st-sub {
+  position: relative; flex: 0 0 120px; min-width: 100px;
+}
+/* linha que conecta as sub-etapas */
+.st-sub:not(:last-child)::after {
+  content: ""; position: absolute; top: 16px; left: calc(50% + 18px); right: calc(-50% + 18px);
+  height: 2px; background: var(--line-strong); transition: background-color 0.3s;
+}
+.st-sub.feita:not(:last-child)::after { background: var(--action); }
+.st-sub.consulta:not(:last-child)::after { background: none; border-top: 2px dashed var(--line-strong); height: 0; }
+.st-sub button {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%;
+  padding: var(--s1) 6px; border: 0; background: none; border-radius: var(--r-sm);
+  cursor: pointer; text-align: center;
+}
+.st-sub-bolinha {
+  position: relative; z-index: 1; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+  font-size: var(--fs-xs); font-weight: 700; font-variant-numeric: tabular-nums;
+  background: var(--surface); border: 2px solid var(--line-control); color: var(--muted);
+  transition: background-color var(--dur), border-color var(--dur), color var(--dur), box-shadow var(--dur);
+}
+.st-sub-bolinha .ic { width: 14px; height: 14px; stroke-width: 2.5; }
+.st-sub.consulta .st-sub-bolinha { border-style: dashed; }
+.st-sub-nome {
+  font-size: 0.75rem; font-weight: 600; line-height: 1.2; color: var(--muted);
+  text-wrap: balance; max-width: 110px; transition: color var(--dur);
+}
+.st-sub button:hover .st-sub-bolinha { border-color: var(--action); color: var(--ok-text); }
+.st-sub button:hover .st-sub-nome { color: var(--fg); }
+.st-sub.feita .st-sub-bolinha {
+  background: var(--action); border-color: var(--action); color: var(--on-action); border-style: solid;
+}
+.st-sub.atual .st-sub-bolinha {
+  border-color: var(--action); color: var(--ok-text); background: var(--surface);
+  box-shadow: 0 0 0 3px var(--ok-soft); border-style: solid; font-weight: 800;
+}
+.st-sub.atual.feita .st-sub-bolinha {
+  background: var(--action); color: var(--on-action);
+}
+.st-sub.atual .st-sub-nome { color: var(--fg); font-weight: 700; }
+
