@@ -118,8 +118,8 @@ export const acesso: Modulo = {
         comoUsar: (
           <ol>
             <li>
-              Informe os dados da empresa: <strong>nome fantasia, CNPJ, razão social, CNAE e data de
-              fundação</strong>. Se a empresa possuir <strong>inscrição estadual</strong>, informe
+              Informe os dados da empresa: <strong>nome fantasia, CNPJ, razão social e data de
+              fundação</strong>. Se a empresa possuir <strong>inscrição municipal</strong>, informe
               também esse dado.
             </li>
             <li>
@@ -137,7 +137,7 @@ export const acesso: Modulo = {
           </ol>
         ),
       },
-      dica: "Os campos com * são obrigatórios. O comprovante do CNPJ pode ajudar a conferir razão social, CNAE e data de fundação.",
+      dica: "Os campos com * são obrigatórios. O comprovante do CNPJ pode ajudar a conferir razão social e data de fundação.",
     },
     {
       id: "acesso-6",
@@ -146,16 +146,15 @@ export const acesso: Modulo = {
       captura: {
         arquivo: "05-cadastro-2.jpg",
         legenda: "Cadastro de Revendedor: Dados do Sócio",
-        oQueE: "A segunda parte do cadastro, com os dados pessoais do sócio responsável.",
+        oQueE: "A segunda parte do cadastro, com a identificação e o contato do sócio responsável.",
         paraQueServe: "Identificar o responsável pela empresa.",
         comoUsar: (
           <ol>
             <li>
-              Preencha as informações solicitadas: <strong>Nome, CPF, RG, Órgão emissor, Data de
-              nascimento, Naturalidade, Estado civil e Sexo</strong>.
+              Preencha as informações solicitadas: <strong>Nome e CPF</strong>. Os campos
+              com <Obrigatorio /> são obrigatórios.
             </li>
-            <li>Informe o endereço do sócio, começando pelo <strong>CEP</strong>.</li>
-            <li>Preencha os dados de contato: telefone, celular e e-mail.</li>
+            <li>Preencha os dados de contato: celular e e-mail.</li>
             <li>Confirme a aceitação dos <strong>Termos e Condições</strong>.</li>
             <li>
               Clique em <Verde>Enviar</Verde>. Para corrigir os dados da empresa,
